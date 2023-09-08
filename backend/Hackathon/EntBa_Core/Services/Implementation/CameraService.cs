@@ -23,7 +23,7 @@ namespace EntBa_Core.Services.Implementation
                 return; // unknown plate, gate not opened
             var entrancePermit = await DbContext.EntrancePermissions.FirstOrDefaultAsync(permit =>
                 permit.LicensePlateId == licensePlate.Id
-                && DateTimeOffset.Now > permit.ValidFrom && DateTimeOffset.Now < permit.ValidTo);
+                && DateTimeOffset.UtcNow > permit.ValidFrom && DateTimeOffset.UtcNow < permit.ValidTo);
             if (entrancePermit is not null)
                 await _pylonService.Open();
         }
