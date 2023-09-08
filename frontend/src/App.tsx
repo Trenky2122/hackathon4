@@ -12,6 +12,7 @@ import NotFound from './Components/ErrorPages/NotFound';
 import UserEntriesHistoryComponent from './Components/Profile/UserEntriesHistory';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfileComponent from "./Components/Profile/Profile";
+import LoginComponent from "./Components/Profile/Login";
 
 function App() {
     return (
@@ -22,6 +23,8 @@ function App() {
 
                     <Route path="/registracia/ziskanieEmailu" element={<GetUserEmailForm/>}></Route>
                     <Route path="/registracia/ziskanieUdajov/:verificationKey" element={<GetUserDetailsForm/>}></Route>
+
+                    <Route path="/prihlasenie" element={<LoginComponent/>}></Route>
 
                     <Route path="/profil" element={<ProfileComponent/>}></Route>
                     <Route path="/profil/ziadost" element={<NotFound/>}></Route>
