@@ -3,7 +3,6 @@ import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
-import * as EmailValidator from 'email-validator';
 import MessagePopUp from "../PopUp/MessagePopUp";
 import BackgroundImage from "../../Images/BackgroundImage";
 import {RegistrationResultEnum} from "../../Models/Models";
@@ -25,7 +24,7 @@ const GetUserEmailForm = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        if(EmailValidator.validate(email)){
+        if(true){
             console.log("Posielam mail na", email)
             // Zavolaj backend endpoint s parametrom mail
             // Backend endpiont nech vytvori gui, a prida data ako mail, cas, gui do tabulky
@@ -39,7 +38,6 @@ const GetUserEmailForm = () => {
 
     return (
         <div>
-            <BackgroundImage/>
             <div className={"container"}>
                 <div className={"row justify-content-center"} >
                     <div className={"col-3 homepageForm"}>

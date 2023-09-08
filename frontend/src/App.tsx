@@ -14,12 +14,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfileComponent from "./Components/Profile/Profile";
 import LoginComponent from "./Components/Profile/Login";
 import RequestsComponent from "./Components/Profile/Requests";
+import BackgroundImage from "./Images/BackgroundImage";
 
 function App() {
     return (
         <div className={"wrapper"}>
             <BrowserRouter>
                 <NavigationComponent/>
+                <BackgroundImage/>
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
 
