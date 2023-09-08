@@ -6,20 +6,21 @@ import TextField from "@material-ui/core/TextField";
 import MessagePopUp from "../PopUp/MessagePopUp";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
+import BackgroundImage from "../../Images/BackgroundImage";
 
 const LoginComponent = () => {
     let navigate = useNavigate();
     let [email, setEmail] : [string, any] = useState("");
     let [password, setPassword] : [string, any] = useState("");
     let [errorMessage, setErrorMessage] : [string, any] = useState("");
-    let [loginSuccessful, setLoginSuccessful] : [boolean, any] = useState(false);
+    let [loginError, setLoginError] : [boolean, any] = useState(false);
 
     const localization = new LocalizedStrings({
         en: {
-            title: "User login",
+            title: "Login",
         },
         sk: {
-            title: "Prihlásenie používateľa",
+            title: "Prihlásenie",
         }
     });
 
@@ -27,42 +28,43 @@ const LoginComponent = () => {
         e.preventDefault()
         // Zavolaj backend endpoint aby si zistil ci su prihlasovacie udaje spravne
         if(password == "admin") {
-            setLoginSuccessful(true)
+            navigate("/profil")
         }
         else {
-            setErrorMessage("Email alebo heslo je nesprávne")
+            setLoginError(true)
         }
     }
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div>{localization.title}</div>
-                <TextField style={{width: 500}} label={"Email"} required autoFocus value={email}
-                           onChange={(e) => {
-                               setEmail(e.target.value);
-                               setErrorMessage("");
-                           }}/>
-                <TextField style={{width: 500}} label={"Heslo"} required value={password}
-                           onChange={(e) => {
-                               setPassword(e.target.value);
-                               setErrorMessage("");
-                           }}/>
-                <Button className={"me-2"} type={"submit"} variant={"success"}>Prihlásiť sa</Button>
-            </form>
+            <BackgroundImage/>
+            <div className={"container"}>
+                <div className={"row justify-content-center"} >
+                    <div className={"col-3 homepageForm"}>
+                        <form onSubmit={handleSubmit}>
+                            <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                            <TextField label={"Email"} required autoFocus value={email}
+                                       onChange={(e) => {
+                                           setEmail(e.target.value);
+                                           setErrorMessage("");
+                                       }} fullWidth />
+                            <TextField label={"Heslo"} required value={password}
+                                       onChange={(e) => {
+                                           setPassword(e.target.value);
+                                           setErrorMessage("");
+                                       }} fullWidth />
+                            <Button className={"me-2 mt-3"} type={"submit"} variant={"success"}>Prihlásiť sa</Button>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <MessagePopUp
-                TitleText={"Login úspešný"}
-                BodyText={"Gratulujeme. Úspešne ste sa prihlásili do Vášho účtu."}
-                ButtonUrl={"/profil"}
-                ButtonText={"Pokračovať"}
-                show={loginSuccessful}
+                TitleText={"Chyba"}
+                BodyText={"Nesprávne prihlasovacie meno alebo heslo. Skúste znovu."}
+                ButtonUrl={""}
+                ButtonText={"Skúsiť znovu"}
+                show={loginError}
             />
-            {errorMessage != '' &&
-                <Alert key={"danger"} variant={"danger"}>
-                    {errorMessage}
-                </Alert>
-            }
-
         </div>
     )
 }
