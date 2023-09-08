@@ -1,3 +1,6 @@
+using EntBa_Core.Services.Implementation;
+using EntBa_Core.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//services
+builder.Services.AddScoped<ICameraService, CameraService>();
 
 var app = builder.Build();
 

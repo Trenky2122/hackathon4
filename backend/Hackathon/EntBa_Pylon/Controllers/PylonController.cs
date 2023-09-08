@@ -1,4 +1,5 @@
-using EntBa_Pylon.Services;
+using EntBa_Core.Enums;
+using EntBa_Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EntBa_Pylon.Controllers
@@ -8,24 +9,29 @@ namespace EntBa_Pylon.Controllers
     public class PylonController : ControllerBase
     {
         
-        private readonly ILogger<PylonController> _logger;
         private readonly IPylonService _service;
 
-        public PylonController(ILogger<PylonController> logger)
+        public PylonController(IPylonService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
         [HttpPost("open")]
-        public async Task<ActionResult> Open()
+        public async Task Open()
         {
-            return Ok();
+            await _service.Open();
         }
 
         [HttpPost("close")]
-        public async Task<ActionResult> Close()
+        public async Task Close()
         {
-            return Ok();
+            await _service.Close();
+        }
+
+        [HttpGet("state")]
+        public async Task<PylonStateEnum> GetState()
+        {
+            return await _service.GetState();
         }
     }
 }

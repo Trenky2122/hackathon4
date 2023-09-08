@@ -1,4 +1,5 @@
-using EntBa_Pylon.Services;
+using EntBa_Core.Services.Implementation;
+using EntBa_Core.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
