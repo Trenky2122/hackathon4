@@ -4,7 +4,7 @@ using EntBa_Core.Entities.Requests;
 
 namespace EntBa_Core.Entities.EntrancePermissions;
 
-public abstract class EntrancePermissionDbo : BaseDbo
+public class EntrancePermissionDbo : BaseDbo
 {
     public int EntranceRequestId { get; set; }
     [ForeignKey(nameof(EntranceRequestId))]

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\EntBa_Core\EntBa_Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
