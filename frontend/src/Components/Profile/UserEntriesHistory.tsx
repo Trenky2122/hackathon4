@@ -3,14 +3,14 @@ import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 
-const UserEntriesComponent = () => {
+const UserEntriesHistoryComponent = () => {
     let navigate = useNavigate();
     const localization = new LocalizedStrings({
         en: {
             title: "Show user entries",
         },
         sk: {
-            title: "Ukázanie vstupov používateľa",
+            title: "História vstupov používateľa",
         }
     });
 
@@ -27,4 +27,4 @@ const UserEntriesComponent = () => {
     )
 }
 
-export default UserEntriesComponent;
+export default UserEntriesHistoryComponent;

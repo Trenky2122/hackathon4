@@ -9,7 +9,10 @@ import PermitNotGrantedComponent from "./Components/ErrorPages/PermitNotGranted"
 import GetUserEmailForm from "./Components/Forms/GetUserEmailForm";
 import Unauthorized from './Components/ErrorPages/Unauthorized';
 import NotFound from './Components/ErrorPages/NotFound';
-import UserEntriesComponent from './Components/Profile/UserEntries';
+import UserEntriesHistoryComponent from './Components/Profile/UserEntriesHistory';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ProfileComponent from "./Components/Profile/Profile";
+import LoginComponent from "./Components/Profile/Login";
 
 function App() {
     return (
@@ -18,16 +21,21 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
 
-                    <Route path="/poziadanieVstupu/zistenieKategorie" element={<DeterminateCategoryForm/>}></Route>
-                    <Route path="/poziadanieVstupu/ziskanieEmailu" element={<GetUserEmailForm/>}></Route>
-                    <Route path="/poziadanieVstupu/ziskanieUdajov/:verificationKey" element={<GetUserDetailsForm/>}></Route>
-                    <Route path="/poziadanieVstupu/vstupZamietnuty" element={<PermitNotGrantedComponent/>}></Route>
+                    <Route path="/registracia/ziskanieEmailu" element={<GetUserEmailForm/>}></Route>
+                    <Route path="/registracia/ziskanieUdajov/:verificationKey" element={<GetUserDetailsForm/>}></Route>
 
-                    <Route path="/profil/zoznamVstupov" element={<UserEntriesComponent/>}></Route>
+                    <Route path="/prihlasenie" element={<LoginComponent/>}></Route>
+
+                    <Route path="/profil" element={<ProfileComponent/>}></Route>
+                    <Route path="/profil/ziadost" element={<NotFound/>}></Route>
+                    <Route path="/profil/historiaVstupov" element={<UserEntriesHistoryComponent/>}></Route>
+
+                    <Route path="/ziadost/kategorizacia" element={<DeterminateCategoryForm/>}></Route>
+                    <Route path="/ziadost/zamietnuta" element={<PermitNotGrantedComponent/>}></Route>
 
                     <Route path="/401" element={<Unauthorized/>}/>
                     <Route path="/404" element={<NotFound/>}/>
-                    <Route path={"/*"} element={<Navigate to='/404' />}/>
+                    <Route path="/*" element={<Navigate to='/404'/>}/>
                 </Routes>
             </BrowserRouter>
         </div>

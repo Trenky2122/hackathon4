@@ -16,7 +16,8 @@ const HomeComponent = () => {
     return (
         <div>
             <h1>{localization.title}</h1>
-            <Button className={"me-2"} variant={"success"} onClick={() => navigate("/poziadanieVstupu/zistenieKategorie")}>Požiadať o vstup</Button>
+            <Button className={"me-2"} variant={"primary"} onClick={() => navigate("/registracia/ziskanieEmailu")}>Registrácia</Button>
+            <Button className={"me-2"} variant={"secondary"} onClick={() => navigate("/prihlasenie")}>Prihlásiť sa</Button>
         </div>
     )
 }
