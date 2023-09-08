@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using EntBa_Core.Services.Implementation;
 using EntBa_Core.Services.Interfaces;
 
@@ -9,8 +10,26 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 //services
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddScoped<IPylonService, PylonService>();
+
+builder.Services.Configure<ClientRateLimitOptions>(options =>
+{
+    options.EnableEndpointRateLimiting = true;
+    options.StackBlockedRequests = false;
+    options.HttpStatusCode = 429;
+    options.GeneralRules = new List<RateLimitRule>
+    {
+        new()
+        {
+            Endpoint = "*",
+            Period = "10s",
+            Limit = 1
+        }
+    };
+});
 
 var app = builder.Build();
 
