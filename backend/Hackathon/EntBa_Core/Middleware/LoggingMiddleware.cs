@@ -20,6 +20,7 @@ namespace EntBa_Core.Middleware
         public async Task InvokeAsync(HttpContext context)
         {
             var path = $"{context.Request.Method}:{context.Request.Path}{context.Request.QueryString}";
+            var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
             _logger.LogTraceRequestEnter(path);
             await _next(context);
             _logger.LogTraceRequestExit(path);

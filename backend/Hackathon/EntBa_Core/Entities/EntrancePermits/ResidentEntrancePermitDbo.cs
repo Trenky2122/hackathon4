@@ -9,5 +9,4 @@ public class ResidentEntrancePermitDbo: BaseEntrancePermitDbo
     public int UserId { get; set; }
     [ForeignKey(nameof(UserId))]
     public UserDbo? User { get; set; }
-    public required string OwnerDeclarationNumber { get; set; }
 }
