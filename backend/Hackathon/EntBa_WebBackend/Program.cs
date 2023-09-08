@@ -1,4 +1,4 @@
-using EntBa_Core.Middleware;
+using EntBa_WebBackend.Middleware;
 using EntBa_Core.Services.Implementation;
 using EntBa_Core.Services.Interfaces;
 

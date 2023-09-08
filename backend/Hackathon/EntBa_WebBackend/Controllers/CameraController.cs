@@ -1,5 +1,6 @@
 using EntBa_Core.ModelsLogic;
 using EntBa_Core.Services.Interfaces;
+using HttpMultipartParser;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -16,12 +17,13 @@ namespace EntBa_WebBackend.Controllers
             _cameraService = cameraService;
         }
 
-        [HttpPost("process")]
+        [HttpPost("processDtkLprEvent")]
         [Consumes("multipart/form-data")]
-        public async Task ProcessCameraInput()
+        public async Task ProcessDtkLprEvent()
         {
-            //todo: get content from multipart request
-            var cameraResult = new CameraResult();
+            var request = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
+            var requestText = request.GetParameterValues("text");
+            var cameraResult = new CameraLprEvent();
             await _cameraService.ProcessCameraInput(cameraResult);
         }
     }
