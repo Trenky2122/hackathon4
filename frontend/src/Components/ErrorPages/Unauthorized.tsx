@@ -14,10 +14,15 @@ const UnauthorizedComponent = ()=>{
     });
 
     return (
-      <div className={"Unauthorized p-4"}>
-          <h1>401: {localization.unauthorized}</h1>
-          <Link to={"/"}>{localization.goHome}</Link>
-      </div>
+        <div className={"container"}>
+            <div className={"row justify-content-center"} >
+                <div className={"col-3 homepageForm"}>
+                    <h1>401</h1>
+                    <h1>{localization.unauthorized}</h1>
+                    <Link to={"/"}>{localization.goHome}</Link>
+                </div>
+            </div>
+        </div>
     );
 }
 
