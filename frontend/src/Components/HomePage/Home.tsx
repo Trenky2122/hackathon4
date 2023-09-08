@@ -10,14 +10,24 @@ const HomeComponent = () => {
             title: "Welcome.",
         },
         sk: {
-            title: "Vitajte.",
+            title: "Vitajte",
         }
     })
     return (
         <div>
-            <h1>{localization.title}</h1>
-            <Button className={"me-2"} variant={"primary"} onClick={() => navigate("/registracia/ziskanieEmailu")}>Registrácia</Button>
-            <Button className={"me-2"} variant={"secondary"} onClick={() => navigate("/prihlasenie")}>Prihlásiť sa</Button>
+            <img className={"bgImage"}
+                     src={require('../../Images/BA.png')}
+                     alt={"music book"}
+            />
+            <div className={"container"}>
+                <div className={"row justify-content-center"} >
+                    <div className={"col-3 homepageForm"}>
+                        <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                        <Button className={"me-2"} variant={"primary"} onClick={() => navigate("/registracia/ziskanieEmailu")}>Registrácia</Button>
+                        <Button className={"me-2"} variant={"light"} onClick={() => navigate("/prihlasenie")}>Prihlásiť sa</Button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

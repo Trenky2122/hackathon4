@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 
 const NavigationComponent = () => {
     let navigate = useNavigate();
+    let location = useLocation();
     const localization = new LocalizedStrings({
         en: {
             home: "Home",
@@ -15,11 +16,16 @@ const NavigationComponent = () => {
             permitRegistration: "Registrácia povolenia",
         }
     });
+
+    useEffect(() => {
+        console.log(location)
+    }, [])
+
     return (
-        <Navbar bg={"light"} expand={false}>
+        <Navbar style={location.pathname === "/" ? {backgroundColor: 'transparent'} : {}} expand={false} >
             <Container fluid>
                 <Navbar.Brand onClick={() => navigate("/")}>
-                    {localization.home}
+                    {location.pathname !== "/" ? localization.home : ""}
                 </Navbar.Brand>
                 <div>
                     <Navbar.Toggle aria-controls={"offcanvasNavbar"}/>
