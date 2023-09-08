@@ -18,12 +18,13 @@ namespace EntBa_Core.DbContext
             Configuration = configuration;
         }
 
-        public DbSet<UserDbo>? Users { get; set; }
-        public DbSet<AdministratorDbo>? Administrators { get; set; }
-        public DbSet<LicensePlate>? LicensePlates { get; set; }
-        public DbSet<EntranceDbo>? Entrances { get; set; }
-        public DbSet<EntrancePermissionDbo>? EntrancePermissions { get; set; }
-        public DbSet<EntranceRequestDbo>? EntranceRequests { get; set; }
+        public required DbSet<UserDbo> Users { get; set; }
+        public required DbSet<AdministratorDbo> Administrators { get; set; }
+        public required DbSet<UserLinkDbo> UserLinks { get; set; }
+        public required DbSet<LicensePlate> LicensePlates { get; set; }
+        public required DbSet<EntranceDbo> Entrances { get; set; }
+        public required DbSet<EntrancePermissionDbo> EntrancePermissions { get; set; }
+        public required DbSet<EntranceRequestDbo> EntranceRequests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
