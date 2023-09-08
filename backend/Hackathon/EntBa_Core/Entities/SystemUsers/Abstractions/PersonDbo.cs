@@ -1,4 +1,6 @@
-﻿namespace EntBa_Core.Entities.Abstractions;
+﻿using EntBa_Core.Entities.Abstractions;
+
+namespace EntBa_Core.Entities.SystemUsers.Abstractions;
 
 public abstract class PersonDbo: BaseDbo
 {
