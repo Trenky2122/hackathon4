@@ -9,8 +9,9 @@ import PermitNotGrantedComponent from "./Components/ErrorPages/PermitNotGranted"
 import GetUserEmailForm from "./Components/Forms/GetUserEmailForm";
 import Unauthorized from './Components/ErrorPages/Unauthorized';
 import NotFound from './Components/ErrorPages/NotFound';
-import UserEntriesComponent from './Components/Profile/UserEntries';
+import UserEntriesHistoryComponent from './Components/Profile/UserEntriesHistory';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ProfileComponent from "./Components/Profile/Profile";
 
 function App() {
     return (
@@ -24,7 +25,9 @@ function App() {
                     <Route path="/poziadanieVstupu/ziskanieUdajov/:verificationKey" element={<GetUserDetailsForm/>}></Route>
                     <Route path="/poziadanieVstupu/vstupZamietnuty" element={<PermitNotGrantedComponent/>}></Route>
 
-                    <Route path="/profil/zoznamVstupov" element={<UserEntriesComponent/>}></Route>
+                    <Route path="/profil" element={<ProfileComponent/>}></Route>
+                    <Route path="/profil/žiadosti" element={<NotFound/>}></Route>
+                    <Route path="/profil/históriaVstupov" element={<UserEntriesHistoryComponent/>}></Route>
 
                     <Route path="/401" element={<Unauthorized/>}/>
                     <Route path="/404" element={<NotFound/>}/>
