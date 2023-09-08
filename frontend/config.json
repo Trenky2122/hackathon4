@@ -1,5 +1,3 @@
 {
-  "serverUrl" : "https://localhost:7277/",
-  "captchaSiteKey": "6LfMrUQiAAAAADXWQDVQHzGfK04lKGzEEXA7K5dP",
-  "numberOfLinkOnHomePage": 4
+  "serverUrl" : "https://X:Y/",
 }
