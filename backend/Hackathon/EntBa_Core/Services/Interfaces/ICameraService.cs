@@ -4,6 +4,6 @@ namespace EntBa_Core.Services.Interfaces
 {
     public interface ICameraService
     {
-        Task ProcessCameraInput(CameraLprEvent cameraLprEvent);
+        Task ProcessCameraLprEvent(CameraLprEvent cameraLprEvent);
     }
 }

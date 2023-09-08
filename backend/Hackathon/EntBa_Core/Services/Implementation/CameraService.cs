@@ -5,7 +5,7 @@ namespace EntBa_Core.Services.Implementation
 {
     public class CameraService : ICameraService
     {
-        public Task ProcessCameraInput(CameraLprEvent cameraLprEvent)
+        public Task ProcessCameraLprEvent(CameraLprEvent cameraLprEvent)
         {
             throw new NotImplementedException();
         }

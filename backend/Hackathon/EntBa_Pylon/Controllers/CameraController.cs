@@ -21,10 +21,9 @@ namespace EntBa_WebBackend.Controllers
         [Consumes("multipart/form-data")]
         public async Task ProcessDtkLprEvent()
         {
-            var request = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
-            var requestText = request.GetParameterValues("text");
-            var cameraResult = new CameraLprEvent();
-            await _cameraService.ProcessCameraInput(cameraResult);
+            var requestParser = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
+            var cameraResult = new CameraLprEvent(requestParser);
+            await _cameraService.ProcessCameraLprEvent(cameraResult);
         }
     }
     
