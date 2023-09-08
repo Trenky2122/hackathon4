@@ -23,7 +23,7 @@ const GetUserEmailForm = () => {
                            setEmail(e.target.value)
                        }}/>
             <Button className={"me-2"} variant={"danger"} onClick={() => navigate("/")}>Zrušiť</Button>
-            <Button className={"me-2"} variant={"success"} onClick={() => navigate("/poziadanieVstupu/overenieEmailu")}>Over email</Button>
+            <Button className={"me-2"} variant={"success"} onClick={() => console.log("Na email Vám bol zaslaný registračný link")}>Over mail</Button>
         </div>
     )
 }

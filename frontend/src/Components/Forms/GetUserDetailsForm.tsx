@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
 
@@ -10,6 +10,8 @@ const GetUserDetailsForm = () => {
     let [surname, setSurname] : [string, any] = useState("");
     let [email, setEmail] : [string, any] = useState("");
     let [password, setPassword] : [string, any] = useState("");
+    const { verificationKey } = useParams();
+
     const localization = new LocalizedStrings({
         en: {
             title: "Get user details",
@@ -18,6 +20,11 @@ const GetUserDetailsForm = () => {
             title: "Získanie údajov o používateľovi",
         }
     });
+
+    useEffect(() => {
+        console.log(verificationKey)
+    }, [])
+
     return (
         <div>
             <div>{localization.title}</div>
