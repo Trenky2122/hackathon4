@@ -28,6 +28,7 @@ const GetUserDetailsForm = () => {
         // Zavolaj backend service aby zistil ze ci existuje taky verif key
         // AK existuje tak daj aj email nech ho mozem vlozit do premennej email
         setEmail("TODO: Email z DB")
+
     }, [])
 
     const handleSubmit = (e: any) => {
