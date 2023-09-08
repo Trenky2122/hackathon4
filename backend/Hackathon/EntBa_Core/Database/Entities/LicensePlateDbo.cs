@@ -4,7 +4,7 @@ using EntBa_Core.Database.Entities.SystemUsers;
 
 namespace EntBa_Core.Database.Entities
 {
-    public class LicensePlate : BaseDbo
+    public class LicensePlateDbo : BaseDbo
     {
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]

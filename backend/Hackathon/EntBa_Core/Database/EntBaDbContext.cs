@@ -21,12 +21,12 @@ namespace EntBa_Core.Database
         public required DbSet<UserDbo> Users { get; set; }
         public required DbSet<AdministratorDbo> Administrators { get; set; }
         public required DbSet<UserLinkDbo> UserLinks { get; set; }
-        public required DbSet<LicensePlate> LicensePlates { get; set; }
+        public required DbSet<LicensePlateDbo> LicensePlates { get; set; }
         public required DbSet<EntranceDbo> Entrances { get; set; }
         public required DbSet<EntrancePermissionDbo> EntrancePermissions { get; set; }
         public required DbSet<EntranceRequestDbo> EntranceRequests { get; set; }
         public required DbSet<CardDbo> Cards { get; set; }
-        public required DbSet<TaxDuty> TaxDuties { get; set; }
+        public required DbSet<TaxDutyDbo> TaxDuties { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

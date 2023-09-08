@@ -4,7 +4,7 @@ using EntBa_Core.Enums;
 
 namespace EntBa_Core.Database.Entities;
 
-public class TaxDuty: BaseDbo
+public class TaxDutyDbo: BaseDbo
 {
     public int UserId { get; set; }
     public UserDbo? User { get; set; }
