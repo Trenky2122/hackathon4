@@ -1,4 +1,5 @@
 using AspNetCoreRateLimit;
+using EntBa_Core.Database;
 using EntBa_Core.Services.Implementation;
 using EntBa_Core.Services.Interfaces;
 
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //services
+builder.Services.AddDbContext<EntBaDbContext>();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddScoped<IPylonService, PylonService>();
 builder.Services.AddScoped<ICameraService, CameraService>();

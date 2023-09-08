@@ -8,7 +8,7 @@ namespace EntBa_Core.Database.Entities.Entrance
         public int LicensePlateId { get; set; }
         [ForeignKey(nameof(LicensePlateId))]
         public LicensePlateDbo? LicensePlate { get; set; }
-        public DateTime Entrance { get; set; }
-        public DateTime Exit { get; set; }
+        public DateTimeOffset Entrance { get; set; }
+        public DateTimeOffset? Exit { get; set; }
     }
 }

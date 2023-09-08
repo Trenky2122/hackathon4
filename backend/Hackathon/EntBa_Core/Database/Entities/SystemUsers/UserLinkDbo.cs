@@ -6,6 +6,6 @@ namespace EntBa_Core.Database.Entities.SystemUsers
     {
         public required string Email { get; set; }
         public required Guid LinkGiud { get; set; }
-        public DateTime CreationTime { get; set; }
+        public DateTimeOffset CreationTime { get; set; }
     }
 }

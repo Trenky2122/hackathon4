@@ -57,9 +57,8 @@ namespace EntBa_Core.Migrations
                     b.Property<int>("EntranceRequestId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("LicensePlate")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("LicensePlateId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("timestamp with time zone");
@@ -70,6 +69,8 @@ namespace EntBa_Core.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EntranceRequestId");
+
+                    b.HasIndex("LicensePlateId");
 
                     b.ToTable("EntrancePermissions");
                 });
@@ -319,7 +320,15 @@ namespace EntBa_Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EntBa_Core.Database.Entities.LicensePlateDbo", "LicensePlateDbo")
+                        .WithMany()
+                        .HasForeignKey("LicensePlateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("EntranceRequest");
+
+                    b.Navigation("LicensePlateDbo");
                 });
 
             modelBuilder.Entity("EntBa_Core.Database.Entities.FileDbo", b =>

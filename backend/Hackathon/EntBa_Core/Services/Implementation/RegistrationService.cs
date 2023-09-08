@@ -21,12 +21,12 @@ namespace EntBa_Core.Services.Implementation
 
             var creationTime = await DbContext.UserLinks.OrderByDescending(x => x.CreationTime).Where(e => e.Email.Equals(email))
                 .Select(x => x.CreationTime).FirstOrDefaultAsync();
-            if (creationTime >= DateTime.Now.AddHours(-VerificationLimitHours))
+            if (creationTime >= DateTimeOffset.Now.AddHours(-VerificationLimitHours))
                 return RegistrationResultEnum.LinkExists;
 
             var userLink = new UserLinkDbo
             {
-                CreationTime = DateTime.UtcNow,
+                CreationTime = DateTimeOffset.UtcNow,
                 Email = email,
                 LinkGiud = Guid.NewGuid()
             };
@@ -40,7 +40,7 @@ namespace EntBa_Core.Services.Implementation
         public async Task<LinkVerificationResult> VerifyLink(Guid link)
         {
             var userLink = await DbContext.UserLinks.FirstOrDefaultAsync(x => x.LinkGiud.Equals(link));
-            if (userLink is null || userLink.CreationTime >= DateTime.Now.AddHours(-VerificationLimitHours))
+            if (userLink is null || userLink.CreationTime >= DateTimeOffset.Now.AddHours(-VerificationLimitHours))
             {
                 return new LinkVerificationResult
                 {

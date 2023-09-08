@@ -17,8 +17,8 @@ public class ReminderService: BaseService
     {
         var activeTaxDutiesCloseToEnd = await DbContext.TaxDuties.Include(duty => duty.User).Where(duty =>
             duty.TaxDutyState == TaxDutyStateEnum.Active
-            && (duty.ValidFrom.AddDays(Constants.TAX_TIME_TO_PAY_DAYS) > DateTime.Now.AddDays(-1 * Constants.TAX_NOTIFICATION_BEFORE_DAYS)
-            || duty.AppealRequested && duty.ValidFrom.AddDays(Constants.TAX_TIME_TO_PAY_DAYS + Constants.TAX_TIME_APPEAL_DAYS) > DateTime.Now.AddDays(-1 * Constants.TAX_NOTIFICATION_BEFORE_DAYS)))
+            && (duty.ValidFrom.AddDays(Constants.TAX_TIME_TO_PAY_DAYS) > DateTimeOffset.Now.AddDays(-1 * Constants.TAX_NOTIFICATION_BEFORE_DAYS)
+            || duty.AppealRequested && duty.ValidFrom.AddDays(Constants.TAX_TIME_TO_PAY_DAYS + Constants.TAX_TIME_APPEAL_DAYS) > DateTimeOffset.Now.AddDays(-1 * Constants.TAX_NOTIFICATION_BEFORE_DAYS)))
             .ToListAsync();
         foreach (var duty in activeTaxDutiesCloseToEnd)
         {

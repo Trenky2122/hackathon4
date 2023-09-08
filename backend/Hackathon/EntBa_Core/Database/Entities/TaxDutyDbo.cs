@@ -9,7 +9,7 @@ public class TaxDutyDbo: BaseDbo
     public int UserId { get; set; }
     public UserDbo? User { get; set; }
     public decimal Amount { get; set; }
-    public DateTime ValidFrom { get; set; }
+    public DateTimeOffset ValidFrom { get; set; }
     public bool AppealRequested { get; set; }
     public TaxDutyStateEnum TaxDutyState { get; set; }
 }

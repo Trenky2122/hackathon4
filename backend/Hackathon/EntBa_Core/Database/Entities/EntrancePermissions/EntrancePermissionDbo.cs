@@ -9,7 +9,9 @@ public class EntrancePermissionDbo : BaseDbo
     public int EntranceRequestId { get; set; }
     [ForeignKey(nameof(EntranceRequestId))]
     public  EntranceRequestDbo? EntranceRequest { get; set; }
-    public DateTime ValidFrom { get; set; }
-    public DateTime ValidTo { get; set; }
-    public required string LicensePlate { get; set; }
+    public DateTimeOffset ValidFrom { get; set; }
+    public DateTimeOffset ValidTo { get; set; }
+    public int LicensePlateId { get; set; }
+    [ForeignKey(nameof(LicensePlateId))]
+    public LicensePlateDbo? LicensePlateDbo { get; set; }
 }

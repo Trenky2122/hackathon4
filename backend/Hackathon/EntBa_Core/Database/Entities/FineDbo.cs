@@ -7,7 +7,7 @@ namespace EntBa_Core.Database.Entities;
 public class FineDbo: BaseDbo
 {
     public decimal Amount { get; set; }
-    public DateTime DueDate { get; set; }
+    public DateTimeOffset DueDate { get; set; }
     public int UserId { get; set; }
     [ForeignKey(nameof(UserId))]
     public UserDbo? User { get; set; }
