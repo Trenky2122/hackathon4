@@ -12,8 +12,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMemoryCache();
 
-//services
-builder.Services.AddScoped<ICameraService, CameraService>();
 
 var app = builder.Build();
 

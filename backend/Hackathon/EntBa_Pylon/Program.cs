@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 //services
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddScoped<IPylonService, PylonService>();
+builder.Services.AddScoped<ICameraService, CameraService>();
 
 builder.Services.Configure<ClientRateLimitOptions>(options =>
 {
