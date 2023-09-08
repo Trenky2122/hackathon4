@@ -36,10 +36,7 @@ const GetUserDetailsForm = () => {
                        onChange={(e) => {
                            setSurname(e.target.value)
                        }}/>
-            <TextField style={{width: 500}} label={"Email"} required value={email}
-                       onChange={(e) => {
-                           setEmail(e.target.value)
-                       }}/>
+            <TextField style={{width: 500}} label={"Email"} required disabled value={"email z databázy"}/>
             <TextField style={{width: 500}} label={"Heslo"} value={password}
                        onChange={(e) => {
                            setPassword(e.target.value)
