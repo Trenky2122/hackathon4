@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EntBa_Core.Entities.Abstractions;
+namespace EntBa_Core.Database.Entities.Abstractions;
 
 public abstract class BaseDbo
 {

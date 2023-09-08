@@ -1,5 +1,5 @@
-﻿using EntBa_Core.DbContext;
-using EntBa_Core.Entities.SystemUsers;
+﻿using EntBa_Core.Database;
+using EntBa_Core.Database.Entities.SystemUsers;
 using EntBa_Core.Enums;
 using EntBa_Core.ModelsLogic.Registration;
 using EntBa_Core.Services.Interfaces;
@@ -11,7 +11,7 @@ namespace EntBa_Core.Services.Implementation
     {
         private const int VerificationLimitHours = 24;
 
-        public RegistrationService(DatabaseContext dbContext) : base(dbContext)
+        public RegistrationService(EntBaDbContext dbContext) : base(dbContext)
         {
         }
         public async Task<RegistrationResultEnum> CreateRegistrationLink(string email)
@@ -59,8 +59,21 @@ namespace EntBa_Core.Services.Implementation
         public async Task Register(User user)
         {
             await DeleteRegistrationLinks(user.Email);
+
             var userDbo = CreateUserDbo(user);
-            await RegisterUser(userDbo);
+            var userId = await SaveUser(userDbo);
+
+            if (user.IdCardNumber is not null)
+            {
+                var cardDbo = new CardDbo
+                {
+                    UserId = userId,
+                    CardType = CardTypeEnum.IdCard,
+                    Country = "SK",
+                    Number = user.IdCardNumber
+                };
+                await SaveCard(cardDbo);
+            }
         }
 
         private async Task DeleteRegistrationLinks(string email)
@@ -69,7 +82,7 @@ namespace EntBa_Core.Services.Implementation
             await DbContext.SaveChangesAsync();
         }
 
-        private UserDbo CreateUserDbo(User user)
+        private static UserDbo CreateUserDbo(User user)
         {
             var salt = BCrypt.Net.BCrypt.GenerateSalt();
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
@@ -83,14 +96,17 @@ namespace EntBa_Core.Services.Implementation
             };
         }
 
-        private async Task RegisterUser(UserDbo userDbo)
+        private async Task<int> SaveUser(UserDbo userDbo)
         {
-
+            await DbContext.Users.AddAsync(userDbo);
+            await DbContext.SaveChangesAsync();
+            return userDbo.Id;
         }
 
-        private async Task AddCardForUser(CardDbo cardDbo)
+        private async Task SaveCard(CardDbo cardDbo)
         {
-
+            await DbContext.Cards.AddAsync(cardDbo);
+            await DbContext.SaveChangesAsync();
         }
     }
 }

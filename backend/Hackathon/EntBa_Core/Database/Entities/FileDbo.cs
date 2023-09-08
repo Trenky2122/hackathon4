@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using EntBa_Core.Entities.Abstractions;
-using EntBa_Core.Entities.Requests;
+using EntBa_Core.Database.Entities.Abstractions;
+using EntBa_Core.Database.Entities.Requests;
 
-namespace EntBa_Core.Entities;
+namespace EntBa_Core.Database.Entities;
 
 public class FileDbo: BaseDbo
 {

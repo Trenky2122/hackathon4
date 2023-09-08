@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using EntBa_Core.Entities.Abstractions;
+using EntBa_Core.Database.Entities.Abstractions;
 
-namespace EntBa_Core.Entities.Entrance
+namespace EntBa_Core.Database.Entities.Entrance
 {
     public class EntranceDbo : BaseDbo
     {

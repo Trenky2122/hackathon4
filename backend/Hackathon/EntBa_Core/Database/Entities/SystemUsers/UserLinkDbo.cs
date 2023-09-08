@@ -1,6 +1,6 @@
-﻿using EntBa_Core.Entities.Abstractions;
+﻿using EntBa_Core.Database.Entities.Abstractions;
 
-namespace EntBa_Core.Entities.SystemUsers
+namespace EntBa_Core.Database.Entities.SystemUsers
 {
     public class UserLinkDbo : BaseDbo
     {
