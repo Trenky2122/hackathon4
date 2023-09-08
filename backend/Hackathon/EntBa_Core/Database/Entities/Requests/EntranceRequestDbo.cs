@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using EntBa_Core.Entities.Abstractions;
-using EntBa_Core.Entities.SystemUsers;
+using EntBa_Core.Database.Entities.Abstractions;
+using EntBa_Core.Database.Entities.SystemUsers;
 using EntBa_Core.Enums;
 
-namespace EntBa_Core.Entities.Requests;
+namespace EntBa_Core.Database.Entities.Requests;
 
 public class EntranceRequestDbo : BaseDbo
 {

@@ -1,3 +1,4 @@
+using EntBa_Core.DbContext;
 using EntBa_WebBackend.Middleware;
 using EntBa_Core.Services.Implementation;
 using EntBa_Core.Services.Interfaces;
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMemoryCache();
-
+builder.Services.AddDbContext<DatabaseContext>();
 
 var app = builder.Build();
 

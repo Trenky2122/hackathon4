@@ -1,8 +1,8 @@
-﻿using EntBa_Core.Entities;
-using EntBa_Core.Entities.Entrance;
-using EntBa_Core.Entities.EntrancePermissions;
-using EntBa_Core.Entities.Requests;
-using EntBa_Core.Entities.SystemUsers;
+﻿using EntBa_Core.Database.Entities;
+using EntBa_Core.Database.Entities.Entrance;
+using EntBa_Core.Database.Entities.EntrancePermissions;
+using EntBa_Core.Database.Entities.Requests;
+using EntBa_Core.Database.Entities.SystemUsers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

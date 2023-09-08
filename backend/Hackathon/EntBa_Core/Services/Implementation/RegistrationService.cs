@@ -1,5 +1,5 @@
-﻿using EntBa_Core.DbContext;
-using EntBa_Core.Entities.SystemUsers;
+﻿using EntBa_Core.Database.Entities.SystemUsers;
+using EntBa_Core.DbContext;
 using EntBa_Core.Enums;
 using EntBa_Core.ModelsLogic.Registration;
 using EntBa_Core.Services.Interfaces;
