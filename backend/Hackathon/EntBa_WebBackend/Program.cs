@@ -1,3 +1,4 @@
+using EntBa_Core.Middleware;
 using EntBa_Core.Services.Implementation;
 using EntBa_Core.Services.Interfaces;
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMemoryCache();
+
 //services
 builder.Services.AddScoped<ICameraService, CameraService>();
 
@@ -26,5 +29,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<LoggingMiddleware>();
 
 app.Run();

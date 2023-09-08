@@ -2,6 +2,7 @@ using EntBa_Core.ModelsLogic;
 using EntBa_Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace EntBa_WebBackend.Controllers
 {
     [ApiController]
@@ -16,10 +17,13 @@ namespace EntBa_WebBackend.Controllers
         }
 
         [HttpPost("process")]
-        public async Task ProcessCameraInput(CameraResult cameraResult)
+        [Consumes("multipart/form-data")]
+        public async Task ProcessCameraInput()
         {
+            //todo: get content from multipart request
+            var cameraResult = new CameraResult();
             await _cameraService.ProcessCameraInput(cameraResult);
         }
-        
     }
+    
 }

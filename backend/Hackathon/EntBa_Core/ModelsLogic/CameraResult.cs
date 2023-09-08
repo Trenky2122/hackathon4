@@ -8,23 +8,23 @@ namespace EntBa_Core.ModelsLogic
         public int ProcessingTime { get; set; }
 
         [JsonProperty("plates")]
-        public required Plate[] Plates { get; set; }
+        public Plate[] Plates { get; set; } = Array.Empty<Plate>();
 
     }
 
     public class Plate
     {
         [JsonProperty("text")]
-        public required string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
 
         [JsonProperty("country")]
-        public required string Country { get; set; }
+        public string Country { get; set; } = string.Empty;
 
         [JsonProperty("country_name")]
-        public required string CountryName { get; set; }
+        public string CountryName { get; set; } = string.Empty;
 
         [JsonProperty("state")]
-        public required string State { get; set; }
+        public string State { get; set; } = string.Empty;
 
         [JsonProperty("confidence")]
         public int Confidence { get; set; }
