@@ -37,7 +37,6 @@ const LoginComponent = () => {
 
     return (
         <div>
-            <BackgroundImage/>
             <div className={"container"}>
                 <div className={"row justify-content-center"} >
                     <div className={"col-3 homepageForm"}>
