@@ -10,6 +10,7 @@ import GetUserEmailForm from "./Components/Forms/GetUserEmailForm";
 import Unauthorized from './Components/ErrorPages/Unauthorized';
 import NotFound from './Components/ErrorPages/NotFound';
 import UserEntriesComponent from './Components/Profile/UserEntries';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
