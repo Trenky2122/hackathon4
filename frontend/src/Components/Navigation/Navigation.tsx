@@ -21,18 +21,34 @@ const NavigationComponent = () => {
                 <Navbar.Brand onClick={() => navigate("/")}>
                     {localization.home}
                 </Navbar.Brand>
+                <div>
+                    <Navbar.Toggle aria-controls={"offcanvasNavbar"}/>
+                </div>
                 <Navbar.Offcanvas id={"offcanvasNavbar"} aria-labelledby={"offcanvasNavbarLabel"} placement={"end"}>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title id="offcanvasNavbarLabel">Menu</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        <Nav className={"justify-content-end flex-grow-1 pe-3"}>
-                            <a>Basic user:</a>
+                        <Nav className={"justify-content-start flex-grow-1 pe-3"}>
+                            <a>Pre všetkých:</a>
                             <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
-                                <Link className={"nav-link"} to={"/"}>{localization.home}</Link>
+                                <Link className={"nav-link"} to={"/"}>Domov</Link>
                             </Navbar.Toggle>
                             <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
-                                <Link className={"nav-link"} to={"permitRegistration"}>{localization.permitRegistration}</Link>
+                                <Link className={"nav-link"} to={"/registracia/ziskanieEmailu"}>Registrácia</Link>
+                            </Navbar.Toggle>
+                            <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
+                                <Link className={"nav-link"} to={"/prihlasenie"}>Prihlásenie</Link>
+                            </Navbar.Toggle>
+                            <a>Pre prihlásených:</a>
+                            <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
+                                <Link className={"nav-link"} to={"/profil"}>Profil</Link>
+                            </Navbar.Toggle>
+                            <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
+                                <Link className={"nav-link"} to={"/profil/ziadosti"}>Žiadosti používateľa</Link>
+                            </Navbar.Toggle>
+                            <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
+                                <Link className={"nav-link"} to={"/profil/historiaVstupov"}>História vstupov používateľa</Link>
                             </Navbar.Toggle>
                         </Nav>
                     </Offcanvas.Body>

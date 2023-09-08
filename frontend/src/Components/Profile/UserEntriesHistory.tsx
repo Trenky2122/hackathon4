@@ -21,7 +21,8 @@ const UserEntriesHistoryComponent = () => {
 
     return (
         <div>
-            <div>{localization.title}</div>
+            <h1>{localization.title}</h1>
+            <p>Neevidujeme vstupy</p>
             <Button className={"me-2"} variant={"success"} onClick={() => navigate("/")}>Domov</Button>
         </div>
     )

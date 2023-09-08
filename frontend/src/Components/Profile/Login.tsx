@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {Button} from "react-bootstrap";
+import {Alert, Button} from "react-bootstrap";
 import {useNavigate, useParams} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
 import SuccessfulPopUp from "../PopUp/SuccessfulPopUp";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 const LoginComponent = () => {
     let navigate = useNavigate();
     let [email, setEmail] : [string, any] = useState("");
     let [password, setPassword] : [string, any] = useState("");
+    let [errorMessage, setErrorMessage] : [string, any] = useState("");
     let [loginSuccessful, setLoginSuccessful] : [boolean, any] = useState(false);
-    const { verificationKey } = useParams();
 
     const localization = new LocalizedStrings({
         en: {
@@ -28,7 +30,7 @@ const LoginComponent = () => {
             setLoginSuccessful(true)
         }
         else {
-            setLoginSuccessful(false)
+            setErrorMessage("Email alebo heslo je nesprávne")
         }
     }
 
@@ -38,11 +40,13 @@ const LoginComponent = () => {
                 <div>{localization.title}</div>
                 <TextField style={{width: 500}} label={"Email"} required autoFocus value={email}
                            onChange={(e) => {
-                               setEmail(e.target.value)
+                               setEmail(e.target.value);
+                               setErrorMessage("");
                            }}/>
                 <TextField style={{width: 500}} label={"Heslo"} required value={password}
                            onChange={(e) => {
-                               setPassword(e.target.value)
+                               setPassword(e.target.value);
+                               setErrorMessage("");
                            }}/>
                 <Button className={"me-2"} type={"submit"} variant={"success"}>Prihlásiť sa</Button>
             </form>
@@ -53,6 +57,12 @@ const LoginComponent = () => {
                 ButtonText={"Pokračovať"}
                 show={loginSuccessful}
             />
+            {errorMessage != '' &&
+                <Alert key={"danger"} variant={"danger"}>
+                    {errorMessage}
+                </Alert>
+            }
+
         </div>
     )
 }

@@ -13,11 +13,13 @@ import UserEntriesHistoryComponent from './Components/Profile/UserEntriesHistory
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProfileComponent from "./Components/Profile/Profile";
 import LoginComponent from "./Components/Profile/Login";
+import RequestsComponent from "./Components/Profile/Requests";
 
 function App() {
     return (
         <div className={"wrapper"}>
             <BrowserRouter>
+                <NavigationComponent/>
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
 
@@ -27,7 +29,7 @@ function App() {
                     <Route path="/prihlasenie" element={<LoginComponent/>}></Route>
 
                     <Route path="/profil" element={<ProfileComponent/>}></Route>
-                    <Route path="/profil/ziadost" element={<NotFound/>}></Route>
+                    <Route path="/profil/ziadosti" element={<RequestsComponent/>}></Route>
                     <Route path="/profil/historiaVstupov" element={<UserEntriesHistoryComponent/>}></Route>
 
                     <Route path="/ziadost/kategorizacia" element={<DeterminateCategoryForm/>}></Route>
