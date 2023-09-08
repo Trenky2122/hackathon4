@@ -30,10 +30,10 @@ namespace EntBa_Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Entrance")
+                    b.Property<DateTimeOffset>("Entrance")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("Exit")
+                    b.Property<DateTimeOffset?>("Exit")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("LicensePlateId")
@@ -60,10 +60,10 @@ namespace EntBa_Core.Migrations
                     b.Property<int>("LicensePlateId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("ValidFrom")
+                    b.Property<DateTimeOffset>("ValidFrom")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("ValidTo")
+                    b.Property<DateTimeOffset>("ValidTo")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -256,7 +256,7 @@ namespace EntBa_Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreationTime")
+                    b.Property<DateTimeOffset>("CreationTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -291,7 +291,7 @@ namespace EntBa_Core.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("ValidFrom")
+                    b.Property<DateTimeOffset>("ValidFrom")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
