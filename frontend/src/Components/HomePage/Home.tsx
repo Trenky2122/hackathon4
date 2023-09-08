@@ -1,7 +1,7 @@
 import LocalizedStrings from "react-localization";
-import {Button} from "react-bootstrap";
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import Button from "react-bootstrap/esm/Button";
 
 const HomeComponent = () => {
     let navigate = useNavigate();
@@ -14,7 +14,7 @@ const HomeComponent = () => {
         }
     })
     return (
-        <div className={"container-fluid"}>
+        <div>
             <h1>{localization.title}</h1>
             <Button className={"me-2"} variant={"success"} onClick={() => navigate("/poziadanieVstupu/zistenieKategorie")}>Požiadať o vstup</Button>
         </div>
