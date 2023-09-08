@@ -30,7 +30,7 @@ namespace EntBa_WebBackend.Controllers
         [HttpPost("register")]
         public async Task Register([FromBody] User user)
         {
-            await 
+            await _service.Register(user);
         }
     }
 }

@@ -25,6 +25,7 @@ namespace EntBa_Core.DbContext
         public required DbSet<EntranceDbo> Entrances { get; set; }
         public required DbSet<EntrancePermissionDbo> EntrancePermissions { get; set; }
         public required DbSet<EntranceRequestDbo> EntranceRequests { get; set; }
+        public required DbSet<CardDbo> Cards { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
