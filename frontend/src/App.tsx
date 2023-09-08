@@ -19,6 +19,7 @@ function App() {
     return (
         <div className={"wrapper"}>
             <BrowserRouter>
+                <NavigationComponent/>
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
 
