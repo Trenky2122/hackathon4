@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 
 const ProfileComponent = () => {
@@ -19,10 +19,15 @@ const ProfileComponent = () => {
     },  [])
 
     return (
-        <div>
-            <div>{localization.title}</div>
-            <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil/ziadosti")}>Žiadosti</Button>
-            <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil/historiaVstupov")}>História vstupov</Button>
+        <div className={"container"}>
+            <div className={"row justify-content-center"} >
+                <div className={"col-3 homepageForm"}>
+                    <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                    <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil/ziadosti")}>Žiadosti</Button>
+                    <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil/historiaVstupov")}>História vstupov</Button>
+                    <Button className={"me-2"} variant={"danger"} onClick={() => navigate("/")}>Odhlásiť sa</Button>
+                </div>
+            </div>
         </div>
     )
 }

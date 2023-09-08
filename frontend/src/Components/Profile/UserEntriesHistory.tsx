@@ -20,10 +20,14 @@ const UserEntriesHistoryComponent = () => {
     },  [])
 
     return (
-        <div>
-            <h1>{localization.title}</h1>
-            <p>Neevidujeme vstupy</p>
-            <Button className={"me-2"} variant={"success"} onClick={() => navigate("/")}>Domov</Button>
+        <div className={"container"}>
+            <div className={"row justify-content-center"} >
+                <div className={"col-3 homepageForm"}>
+                    <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                    <p>Neevidujeme vstupy</p>
+                    <Button className={"me-2"} variant={"success"} onClick={() => navigate("/")}>Domov</Button>
+                </div>
+            </div>
         </div>
     )
 }
