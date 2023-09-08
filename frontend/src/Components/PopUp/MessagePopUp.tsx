@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 // Component used to deliver successful message to user via popUp
 // Prop parameter ButtonUrl is used to redirect user
 // In case when ButtonUrl is empty string (""), page will be reloaded
-const SuccessfulPopUp = (props : { TitleText: string, BodyText: string, readonly ButtonText?: string , readonly ButtonUrl: string, show: boolean}) => {
+const MessagePopUp = (props : { TitleText: string, BodyText: string, readonly ButtonText?: string , readonly ButtonUrl: string, show: boolean}) => {
     let navigate = useNavigate();
     const localization = new LocalizedStrings({
         en:{
@@ -36,4 +36,4 @@ const SuccessfulPopUp = (props : { TitleText: string, BodyText: string, readonly
     )
 }
 
-export default SuccessfulPopUp;
+export default MessagePopUp;

@@ -3,7 +3,7 @@ import {Button, Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
-import SuccessfulPopUp from "../PopUp/SuccessfulPopUp";
+import MessagePopUp from "../PopUp/MessagePopUp";
 
 const GetUserDetailsForm = () => {
     let navigate = useNavigate();
@@ -55,7 +55,7 @@ const GetUserDetailsForm = () => {
                            }}/>
                 <Button className={"me-2"} type={"submit"} variant={"success"} onClick={() => console.log("")}>Dokončiť registráciu</Button>
             </form>
-            <SuccessfulPopUp
+            <MessagePopUp
                 TitleText={"Registrácia úspešná"}
                 BodyText={"Gratulujeme. Úspešne ste zaregistrovaný. Môžete požiadať o žiadosť."}
                 ButtonUrl={"/profil"}

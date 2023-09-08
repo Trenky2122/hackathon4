@@ -3,7 +3,7 @@ import {Alert, Button} from "react-bootstrap";
 import {useNavigate, useParams} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
-import SuccessfulPopUp from "../PopUp/SuccessfulPopUp";
+import MessagePopUp from "../PopUp/MessagePopUp";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 
@@ -50,7 +50,7 @@ const LoginComponent = () => {
                            }}/>
                 <Button className={"me-2"} type={"submit"} variant={"success"}>Prihlásiť sa</Button>
             </form>
-            <SuccessfulPopUp
+            <MessagePopUp
                 TitleText={"Login úspešný"}
                 BodyText={"Gratulujeme. Úspešne ste sa prihlásili do Vášho účtu."}
                 ButtonUrl={"/profil"}

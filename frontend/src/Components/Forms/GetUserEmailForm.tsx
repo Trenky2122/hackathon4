@@ -4,14 +4,16 @@ import {useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
 import * as EmailValidator from 'email-validator';
-import SuccessfulPopUp from "../PopUp/SuccessfulPopUp";
+import MessagePopUp from "../PopUp/MessagePopUp";
 import BackgroundImage from "../../Images/BackgroundImage";
+import {RegistrationResultEnum} from "../../Models/Models";
 
 const GetUserEmailForm = () => {
     let navigate = useNavigate();
     let [email, setEmail] : [string, any] = useState("");
     let [emailSent, setEmailSent] : [boolean, any] = useState(false);
     let [errorMessage, setErrorMessage] : [string, any] = useState(" ");
+    let [serverResponse, setServerResponse] : [any, any?] = useState(null);
     const localization = new LocalizedStrings({
         en: {
             title: "Get user email",
@@ -28,6 +30,7 @@ const GetUserEmailForm = () => {
             // Zavolaj backend endpoint s parametrom mail
             // Backend endpiont nech vytvori gui, a prida data ako mail, cas, gui do tabulky
             setEmailSent(true)
+            setServerResponse(RegistrationResultEnum.Ok)
         }
         else{
             setErrorMessage("Neplatný mail")
@@ -52,12 +55,26 @@ const GetUserEmailForm = () => {
                     </div>
                 </div>
             </div>
-            <SuccessfulPopUp
+            <MessagePopUp
                 TitleText={"Email poslaný"}
                 BodyText={"Email s unikátnym linkom Vám bol odoslaný na mailovú adresu. Link má dobu expirácie 1 deň."}
                 ButtonUrl={"/"}
                 ButtonText={"Domov"}
-                show={emailSent}
+                show={serverResponse === RegistrationResultEnum.Ok}
+            />
+            <MessagePopUp
+                TitleText={"Link je vygenerovaný"}
+                BodyText={"Aktuálne už máte vygenerovaný unikátny link. Pozrite si mail."}
+                ButtonUrl={"/"}
+                ButtonText={"Domov"}
+                show={serverResponse === RegistrationResultEnum.LinkExists}
+            />
+            <MessagePopUp
+                TitleText={"Link je vygenerovaný"}
+                BodyText={"Aktuálne už máte vygenerovaný unikátny link. Pozrite si mail."}
+                ButtonUrl={"/"}
+                ButtonText={"Domov"}
+                show={serverResponse === RegistrationResultEnum.UserExists}
             />
         </div>
     )
