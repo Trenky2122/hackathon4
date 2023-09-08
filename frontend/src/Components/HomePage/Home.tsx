@@ -2,6 +2,7 @@ import LocalizedStrings from "react-localization";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
+import BackgroundImage from "../../Images/BackgroundImage";
 
 const HomeComponent = () => {
     let navigate = useNavigate();
@@ -15,10 +16,7 @@ const HomeComponent = () => {
     })
     return (
         <div>
-            <img className={"bgImage"}
-                     src={require('../../Images/BA.png')}
-                     alt={"music book"}
-            />
+            <BackgroundImage/>
             <div className={"container"}>
                 <div className={"row justify-content-center"} >
                     <div className={"col-3 homepageForm"}>
