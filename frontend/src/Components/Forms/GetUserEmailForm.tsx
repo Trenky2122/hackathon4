@@ -8,6 +8,7 @@ import * as EmailValidator from 'email-validator';
 const GetUserEmailForm = () => {
     let navigate = useNavigate();
     let [email, setEmail] : [string, any] = useState("");
+    let [errorMessage, setErrorMessage] : [string, any] = useState("");
     const localization = new LocalizedStrings({
         en: {
             title: "Get user details",
@@ -23,7 +24,7 @@ const GetUserEmailForm = () => {
             console.log("Posielam mail na", email)
         }
         else{
-            console.log("Neplatný mail")
+            setErrorMessage("Neplatný mail")
         }
     }
 
@@ -33,8 +34,9 @@ const GetUserEmailForm = () => {
                 <div>{localization.title}</div>
                 <TextField style={{width: 500}} label={"Email"} required value={email}
                            onChange={(e) => {
-                               setEmail(e.target.value)
-                           }}/>
+                               setEmail(e.target.value);
+                               setErrorMessage("");
+                           }} error={errorMessage != ""} helperText={errorMessage} />
                 <Button className={"me-2"} variant={"danger"} onClick={() => navigate("/")}>Zrušiť</Button>
                 <Button className={"me-2"} type={"submit"} variant={"success"}>Over mail</Button>
             </form>
