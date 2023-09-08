@@ -1,4 +1,5 @@
-﻿/backend/Hackathon/EntBa_Core/obj/*
+﻿obj/
+bin/
 frontend/.idea/*
 /backend/Hackathon/.idea/*
 /.vs
