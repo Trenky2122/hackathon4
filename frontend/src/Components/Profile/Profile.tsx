@@ -21,7 +21,7 @@ const ProfileComponent = () => {
     return (
         <div>
             <div>{localization.title}</div>
-            <Button className={"me-2"} variant={"success"} onClick={() => navigate("/žiadosti")}>Žiadosti</Button>
+            <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil/ziadosti")}>Žiadosti</Button>
             <Button className={"me-2"} variant={"success"} onClick={() => navigate("/")}>História vstupov</Button>
         </div>
     )
