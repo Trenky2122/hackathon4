@@ -14,10 +14,15 @@ const NotFoundComponent = ()=>{
     });
 
     return (
-      <div className={"notFound p-4"}>
-          <h1>404: {localization.notFound}</h1>
-          <Link to={"/"}>{localization.goHome}</Link>
-      </div>
+        <div className={"container"}>
+            <div className={"row justify-content-center"} >
+                <div className={"col-3 homepageForm"}>
+                    <h1>404</h1>
+                    <h1>{localization.notFound}</h1>
+                    <Link to={"/"}>{localization.goHome}</Link>
+                </div>
+            </div>
+        </div>
     );
 }
 
