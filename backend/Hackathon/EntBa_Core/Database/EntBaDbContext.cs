@@ -6,14 +6,14 @@ using EntBa_Core.Database.Entities.SystemUsers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace EntBa_Core.DbContext
+namespace EntBa_Core.Database
 {
-    public class DatabaseContext : Microsoft.EntityFrameworkCore.DbContext
+    public class EntBaDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
 
-        protected readonly IConfiguration Configuration;
+        private readonly IConfiguration Configuration;
 
-        public DatabaseContext(IConfiguration configuration)
+        public EntBaDbContext(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -26,7 +26,8 @@ namespace EntBa_Core.DbContext
         public required DbSet<EntrancePermissionDbo> EntrancePermissions { get; set; }
         public required DbSet<EntranceRequestDbo> EntranceRequests { get; set; }
         public required DbSet<CardDbo> Cards { get; set; }
-
+        public required DbSet<TaxDuty> TaxDuties { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("Database"));

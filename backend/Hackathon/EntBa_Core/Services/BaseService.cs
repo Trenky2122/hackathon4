@@ -1,11 +1,11 @@
-﻿using EntBa_Core.DbContext;
+﻿using EntBa_Core.Database;
 
 namespace EntBa_Core.Services
 {
     public abstract class BaseService
     {
-        protected readonly DatabaseContext DbContext;
-        protected BaseService(DatabaseContext dbContext)
+        protected readonly EntBaDbContext DbContext;
+        protected BaseService(EntBaDbContext dbContext)
         {
             DbContext = dbContext;
         }

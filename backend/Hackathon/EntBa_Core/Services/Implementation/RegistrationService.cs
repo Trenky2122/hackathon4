@@ -1,5 +1,5 @@
-﻿using EntBa_Core.Database.Entities.SystemUsers;
-using EntBa_Core.DbContext;
+﻿using EntBa_Core.Database;
+using EntBa_Core.Database.Entities.SystemUsers;
 using EntBa_Core.Enums;
 using EntBa_Core.ModelsLogic.Registration;
 using EntBa_Core.Services.Interfaces;
@@ -11,7 +11,7 @@ namespace EntBa_Core.Services.Implementation
     {
         private const int VerificationLimitHours = 24;
 
-        public RegistrationService(DatabaseContext dbContext) : base(dbContext)
+        public RegistrationService(EntBaDbContext dbContext) : base(dbContext)
         {
         }
         public async Task<RegistrationResultEnum> CreateRegistrationLink(string email)
