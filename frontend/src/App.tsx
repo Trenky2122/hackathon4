@@ -20,18 +20,19 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
 
-                    <Route path="/poziadanieVstupu/zistenieKategorie" element={<DeterminateCategoryForm/>}></Route>
-                    <Route path="/poziadanieVstupu/ziskanieEmailu" element={<GetUserEmailForm/>}></Route>
-                    <Route path="/poziadanieVstupu/ziskanieUdajov/:verificationKey" element={<GetUserDetailsForm/>}></Route>
-                    <Route path="/poziadanieVstupu/vstupZamietnuty" element={<PermitNotGrantedComponent/>}></Route>
+                    <Route path="/registracia/ziskanieEmailu" element={<GetUserEmailForm/>}></Route>
+                    <Route path="/registracia/ziskanieUdajov/:verificationKey" element={<GetUserDetailsForm/>}></Route>
 
                     <Route path="/profil" element={<ProfileComponent/>}></Route>
-                    <Route path="/profil/žiadosti" element={<NotFound/>}></Route>
-                    <Route path="/profil/históriaVstupov" element={<UserEntriesHistoryComponent/>}></Route>
+                    <Route path="/profil/ziadost" element={<NotFound/>}></Route>
+                    <Route path="/profil/historiaVstupov" element={<UserEntriesHistoryComponent/>}></Route>
+
+                    <Route path="/ziadost/kategorizacia" element={<DeterminateCategoryForm/>}></Route>
+                    <Route path="/ziadost/zamietnuta" element={<PermitNotGrantedComponent/>}></Route>
 
                     <Route path="/401" element={<Unauthorized/>}/>
                     <Route path="/404" element={<NotFound/>}/>
-                    <Route path={"/*"} element={<Navigate to='/404' />}/>
+                    <Route path="/*" element={<Navigate to='/404'/>}/>
                 </Routes>
             </BrowserRouter>
         </div>
