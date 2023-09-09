@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import { RegistrationResultEnum } from "../Models/Models";
 
 class SongbookBackendService{
-    static config = require("../config.json");
+    static config = require("../../config.json");
     static serverUrl = SongbookBackendService.config.serverUrl;
 
     // region Registration
