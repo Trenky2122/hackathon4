@@ -16,4 +16,8 @@ export class UtilService{
         }
         return await executeRecaptcha(actionName);
     }
+
+    public static UserIsLogged(): boolean {
+        return localStorage.getItem("loggedIn") == "true";
+    }
 }
