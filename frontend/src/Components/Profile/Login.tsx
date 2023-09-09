@@ -46,12 +46,12 @@ const LoginComponent = () => {
                                        onChange={(e) => {
                                            setEmail(e.target.value);
                                            setErrorMessage("");
-                                       }} fullWidth />
+                                       }} fullWidth type={"email"} />
                             <TextField label={"Heslo"} required value={password}
                                        onChange={(e) => {
                                            setPassword(e.target.value);
                                            setErrorMessage("");
-                                       }} fullWidth />
+                                       }} fullWidth type={"password"} />
                             <Button className={"me-2 mt-3"} type={"submit"} variant={"success"}>Prihlásiť sa</Button>
                         </form>
                     </div>
