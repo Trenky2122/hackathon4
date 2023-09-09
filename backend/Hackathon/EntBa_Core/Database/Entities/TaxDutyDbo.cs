@@ -12,4 +12,5 @@ public class TaxDutyDbo: BaseDbo
     public DateTimeOffset ValidFrom { get; set; }
     public bool AppealRequested { get; set; }
     public TaxDutyStateEnum TaxDutyState { get; set; }
+    public required string VariableSymbol { get; set; }
 }

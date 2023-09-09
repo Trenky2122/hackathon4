@@ -3,6 +3,7 @@ using System;
 using EntBa_Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EntBa_Core.Migrations
 {
     [DbContext(typeof(EntBaDbContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230909124053_VerifiedUser")]
+    partial class VerifiedUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,6 +325,9 @@ namespace EntBa_Core.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("Verified")
+                        .HasColumnType("boolean");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -469,7 +475,7 @@ namespace EntBa_Core.Migrations
             modelBuilder.Entity("EntBa_Core.Database.Entities.SystemUsers.CardDbo", b =>
                 {
                     b.HasOne("EntBa_Core.Database.Entities.SystemUsers.UserDbo", "User")
-                        .WithMany()
+                        .WithMany("IdCards")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -491,6 +497,11 @@ namespace EntBa_Core.Migrations
             modelBuilder.Entity("EntBa_Core.Database.Entities.Requests.EntranceRequestDbo", b =>
                 {
                     b.Navigation("Files");
+                });
+
+            modelBuilder.Entity("EntBa_Core.Database.Entities.SystemUsers.UserDbo", b =>
+                {
+                    b.Navigation("IdCards");
                 });
 #pragma warning restore 612, 618
         }

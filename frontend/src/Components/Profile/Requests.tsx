@@ -12,7 +12,7 @@ const RequestsComponent = () => {
     return (
         <div className={"container"}>
             <div className={"row justify-content-center"} >
-                <div className={"col-8 homepageForm"}>
+                <div className={"col-8 homepageForm"} style={{margin: "150px", textDecoration: "none"}}>
                     <h1 style={{marginBottom: "30px"}}>Žiadosti používateľa</h1>
                     <h2>Povolené</h2>
                     <p>Žiadne</p>

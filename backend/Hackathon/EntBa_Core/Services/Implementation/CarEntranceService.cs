@@ -102,7 +102,8 @@ namespace EntBa_Core.Services.Implementation
             {
                 UserId = permission.EntranceRequest!.UserId,
                 ValidFrom = DateTimeOffset.UtcNow,
-                Amount = _taxDutiesesService.CalculateTaxAmountForRequest(permission.EntranceRequest)
+                Amount = _taxDutiesesService.CalculateTaxAmountForRequest(permission.EntranceRequest),
+                VariableSymbol = permission.ValidFrom.ToString("yymmdd")+ "/" + permission.EntranceRequestId
             });
             await DbContext.SaveChangesAsync();
             await pylonTask;
@@ -158,6 +159,13 @@ namespace EntBa_Core.Services.Implementation
                     ExitCameraFront = DateTimeOffset.UtcNow,
                     LicensePlateId = licensePlate.Id,
                     PermissionId = permission.Id
+                });
+                await _taxDutiesesService.CreateTaxDuty(new TaxDutyDbo()
+                {
+                    UserId = permission.EntranceRequest!.UserId,
+                    ValidFrom = DateTimeOffset.UtcNow,
+                    Amount = _taxDutiesesService.CalculateTaxAmountForRequest(permission.EntranceRequest),
+                    VariableSymbol = permission.ValidFrom.ToString("yymmdd")+ "/" + permission.EntranceRequestId
                 });
             }
             else
@@ -230,6 +238,13 @@ namespace EntBa_Core.Services.Implementation
                     ExitCameraBack = DateTimeOffset.UtcNow,
                     LicensePlateId = licensePlate.Id,
                     PermissionId = permission.Id
+                });
+                await _taxDutiesesService.CreateTaxDuty(new TaxDutyDbo()
+                {
+                    UserId = permission.EntranceRequest!.UserId,
+                    ValidFrom = DateTimeOffset.UtcNow,
+                    Amount = _taxDutiesesService.CalculateTaxAmountForRequest(permission.EntranceRequest),
+                    VariableSymbol = permission.ValidFrom.ToString("yymmdd")+ "/" + permission.EntranceRequestId
                 });
             }
             else
