@@ -24,7 +24,7 @@ class SongbookBackendService{
     //region User
 
     static verifyRecaptchaToken(token: string, action: string): Promise<AxiosResponse<boolean>>{
-        return axios.post(this.serverUrl+"/recaptcha/"+token+"/"+action);
+        return axios.post(this.serverUrl+"recaptcha/"+token+"/"+action);
     }
 
     //endregion

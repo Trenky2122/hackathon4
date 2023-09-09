@@ -21,7 +21,8 @@ public sealed class LoggingMiddleware
     }
 
     public async Task InvokeAsync(HttpContext context)
-    {context.Request.EnableBuffering();
+    {
+        context.Request.EnableBuffering();
         var path = $"{context.Request.Method}:{context.Request.Path}{context.Request.QueryString}";
         await _next(context);
         _logger.LogTraceRequestExit(path);

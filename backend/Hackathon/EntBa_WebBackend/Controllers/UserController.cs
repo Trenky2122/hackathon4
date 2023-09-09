@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EntBa_WebBackend.Controllers
 {
+    [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -11,11 +12,10 @@ namespace EntBa_WebBackend.Controllers
             _userService = userService;
         }
 
-        [HttpPost("/recaptcha/{token}/{action}")]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<bool> RecaptchaVerification(string token, string action)
+        [HttpPost("/recaptcha/{token}/{userAction}")]
+        public async Task<bool> RecaptchaVerification(string token, string userAction)
         {
-            return await _userService.RecaptchaVerification(token, action);
+            return await _userService.RecaptchaVerification(token, userAction);
         }
     }
 }
