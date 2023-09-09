@@ -3,6 +3,8 @@ using EntBa_Core.Database;
 using EntBa_Core.Database.Entities;
 using EntBa_Core.Database.Entities.Entrance;
 using EntBa_Core.Database.Entities.EntrancePermissions;
+using EntBa_Core.Database.Entities.Fines;
+using EntBa_Core.Database.Entities.Fines.Abstractions;
 using EntBa_Core.ModelsLogic;
 using EntBa_Core.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -12,16 +14,15 @@ namespace EntBa_Core.Services.Implementation
     public class CarEntranceService : BaseService, ICarEntranceService
     {
         private readonly IPylonService _pylonService;
-        private readonly ITaxCalculationService _taxCalculationService;
-        private readonly IEmailService _emailService;
+        private readonly TaxDutiesesService _taxDutiesesService;
+        private readonly FinesService _finesService;
         public CarEntranceService(EntBaDbContext dbContext, 
             IPylonService pylonService, 
-            ITaxCalculationService taxCalculationService,
-            IEmailService emailService) : base(dbContext)
+            IEmailService emailService, FinesService finesService, TaxDutiesesService taxDutiesesService) : base(dbContext)
         {
             _pylonService = pylonService;
-            _taxCalculationService = taxCalculationService;
-            _emailService = emailService;
+            _finesService = finesService;
+            _taxDutiesesService = taxDutiesesService;
         }
 
         public async Task ProcessCameraLprEventFrontCamera(CameraLprEvent cameraLprEvent)
@@ -47,7 +48,15 @@ namespace EntBa_Core.Services.Implementation
                          plate.Country == cameraLprEvent.LicensePlateCountryCode);
             if (licensePlate is null)
             {
-                // TODO: Domysliet
+                await _finesService.CreateNonUserFine(new NonUserFineDbo()
+                {
+                    DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                    CreationDate = DateTimeOffset.UtcNow,
+                    LicensePlate = cameraLprEvent.LicensePlate,
+                    LicensePlateCountryCode = cameraLprEvent.LicensePlateCountryCode,
+                    Amount = 123456,
+                    Reason = "Neoprávnený vstup ..."
+                });
                 return;
             }
             var entranceFromFront = await DbContext.Entrances
@@ -64,6 +73,14 @@ namespace EntBa_Core.Services.Implementation
                 {
                     // notifikacia uradov s dokazovym materialom
                     // vyrubenie pokuty
+                    await _finesService.CreateUserFine(new RegisteredUserFineDbo()
+                    {
+                        Reason = "Neoprávnený vstup",
+                        DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                        CreationDate = DateTimeOffset.UtcNow,
+                        Amount = 123456,
+                        UserId = licensePlate.UserId
+                    });
                     return;
                 }
                 await DbContext.Entrances.AddAsync(new EntranceDbo()
@@ -80,11 +97,11 @@ namespace EntBa_Core.Services.Implementation
                 permission = entranceFromFront.Permission!;
             }
             
-            await DbContext.TaxDuties.AddAsync(new TaxDutyDbo()
+            await _taxDutiesesService.CreateTaxDuty(new TaxDutyDbo()
             {
                 UserId = permission.EntranceRequest!.UserId,
                 ValidFrom = DateTimeOffset.UtcNow,
-                Amount = _taxCalculationService.CalculateTaxAmountForRequest(permission.EntranceRequest)
+                Amount = _taxDutiesesService.CalculateTaxAmountForRequest(permission.EntranceRequest)
             });
             await DbContext.SaveChangesAsync();
         }
