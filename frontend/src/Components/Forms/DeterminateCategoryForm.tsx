@@ -55,7 +55,7 @@ const DeterminateCategoryForm = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        console.log("POUŽÍVATEL SA ZARADIL DO SKUPINY", caseIndex)
+        navigate("/ziadost/kategoria/"+caseIndex.toString())
     }
 
     return (
