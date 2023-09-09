@@ -1,15 +1,18 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
 import MessagePopUp from "../PopUp/MessagePopUp";
 import {RegistrationResultEnum} from "../../Models/Models";
+import {useGoogleReCaptcha} from "react-google-recaptcha-v3";
+import {UtilService} from "../../Service/UtilService";
 
 const GetUserEmailForm = () => {
     let navigate = useNavigate();
     let [email, setEmail] : [string, any] = useState("");
     let [serverResponse, setServerResponse] : [any, any?] = useState(null);
+    const actionName: string = "get_user_email";
     const localization = new LocalizedStrings({
         en: {
             title: "Get user email",
@@ -18,13 +21,29 @@ const GetUserEmailForm = () => {
             title: "Zadajte Váš email",
         }
     });
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
+    const processRecaptcha = async (): Promise<boolean> => {
+        let token = await getRecaptchaToken();
+        return await UtilService.verifyReCaptchaToken(token, actionName);
+    }
+
+    const getRecaptchaToken = useCallback(async (): Promise<string> => {
+            return await UtilService.getRecaptchaToken(executeRecaptcha!, actionName)
+    }, [executeRecaptcha]);
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        console.log("Posielam mail na", email)
-        // Zavolaj backend endpoint s parametrom mail
-        // Backend endpiont nech vytvori gui, a prida data ako mail, cas, gui do tabulky
-        setServerResponse(RegistrationResultEnum.Ok)
+        processRecaptcha().then((res) =>{
+            if(res){
+                console.log("Posielam mail na", email)
+                // Zavolaj backend endpoint s parametrom mail
+                // Backend endpiont nech vytvori gui, a prida data ako mail, cas, gui do tabulky
+                setServerResponse(RegistrationResultEnum.Ok)
+            }
+        }).catch((e) => {
+            console.log(e)
+        });
     }
 
     return (

@@ -15,6 +15,9 @@ import ProfileComponent from "./Components/Profile/Profile";
 import LoginComponent from "./Components/Profile/Login";
 import RequestsComponent from "./Components/Profile/Requests";
 import BackgroundImage from "./Images/BackgroundImage";
+import RecaptchaWrapper from "./Components/Captcha/RecaptchaWrapper";
+import {Constants} from "./Constants/Constants";
+import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 function App() {
     return (
@@ -22,6 +25,8 @@ function App() {
             <BrowserRouter>
                 <NavigationComponent/>
                 <BackgroundImage/>
+                <GoogleReCaptchaProvider reCaptchaKey={Constants.RECAPTCHA_SITE_KEY}>
+
                 <Routes>
                     <Route path="/" element={<Home/>}></Route>
 
@@ -41,6 +46,8 @@ function App() {
                     <Route path="/404" element={<NotFound/>}/>
                     <Route path="/*" element={<Navigate to='/404'/>}/>
                 </Routes>
+
+                </GoogleReCaptchaProvider>
             </BrowserRouter>
         </div>
     );
