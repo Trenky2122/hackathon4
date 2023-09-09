@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {UtilService} from "../../Service/UtilService";
 
 const DeterminateCategoryForm = () => {
     const cases : string[] = [
@@ -49,7 +48,7 @@ const DeterminateCategoryForm = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if(caseIndex == 12)
+        if(caseIndex === 12)
             navigate("/ziadost/zamietnuta")
     }, [caseIndex])
 

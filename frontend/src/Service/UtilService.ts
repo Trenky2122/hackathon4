@@ -3,7 +3,7 @@ import BackendService from "./BackendService";
 
 export class UtilService{
     public static async verifyReCaptchaToken(token: string, actionName: string):Promise<boolean>{
-        if(token == ""){
+        if(token === ""){
             return false
         }
         let result = await BackendService.verifyRecaptchaToken(token, actionName);
