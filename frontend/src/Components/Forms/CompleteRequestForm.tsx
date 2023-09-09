@@ -10,17 +10,14 @@ const CompleteRequestForm = () => {
     let navigate = useNavigate();
     const { caseIndex } = useParams();
     let [requestPrices, setRequestPrices]: [number[], any] = useState([0, 0])
-    let [displayedPrice, setDisplayedPrice]: [number, any] = useState(0)
+    let [licensePlate, setLicensePlate]: [string, any] = useState("")
     let [isYearly, setIsYearly]: [boolean, any] = useState(false)
 
     useEffect(() => {
         if(caseIndex === undefined || !isNumeric(caseIndex) || Number(caseIndex) < 0 || Number(caseIndex) > 11)
             navigate("/404")
         else{
-            let dayPrice = UtilService.CalculateTaxAmountForRequest(Number(caseIndex), false)
-            let yearPrice = UtilService.CalculateTaxAmountForRequest(Number(caseIndex), true)
-            console.log(dayPrice, yearPrice)
-            setRequestPrices([dayPrice, yearPrice])
+            setRequestPrices([UtilService.CalculateTaxAmountForRequest(Number(caseIndex), false), UtilService.CalculateTaxAmountForRequest(Number(caseIndex), true)])
         }
     }, [caseIndex])
 
@@ -36,7 +33,8 @@ const CompleteRequestForm = () => {
                         <h1 style={{marginBottom: "30px"}}>Dokončenie požidadavky o židaosť</h1>
                         <Button className={"me-2"} onClick={() => setIsYearly(false)} variant={"primary"}>Deň</Button>
                         <Button className={"me-2"} disabled={requestPrices[1] === 0} onClick={() => setIsYearly(true)} variant={"primary"}>Rok</Button>
-                        <TextField label={"Cnea"} disabled value={!isYearly ? requestPrices[0] : requestPrices[1] }/>
+                        <TextField label={"Cena"} disabled value={!isYearly ? requestPrices[0] : requestPrices[1] }/>
+                        <TextField label={"EČV vozidla"} value={licensePlate} onChange={(e) => {setLicensePlate(e.target.value)}}/>
                         <Button className={"me-2"} onClick={() => navigate("/profil/ziadosti")} variant={"danger"}>Zrušiť</Button>
                         <Button className={"me-2"} type={"submit"} variant={"success"}>Potvrdiť</Button>
                     </form>
