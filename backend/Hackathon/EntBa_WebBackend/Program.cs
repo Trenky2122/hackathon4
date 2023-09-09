@@ -1,4 +1,6 @@
 using EntBa_Core.Database;
+using EntBa_Core.NationalRegisters.Implementation;
+using EntBa_Core.NationalRegisters.Interfaces;
 using EntBa_WebBackend.Middleware;
 using EntBa_Core.Services.Implementation;
 using EntBa_Core.Services.Interfaces;
@@ -16,6 +18,10 @@ builder.Services.AddDbContext<EntBaDbContext>();
 //services
 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 builder.Services.AddScoped<IUserService, UserService>();
+//registers
+builder.Services.AddScoped<ILicensePlateRegister, LicensePlateRegister>();
+builder.Services.AddScoped<IOwnershipRegister, OwnershipRegister>();
+builder.Services.AddScoped<IPhysicalPersonRegister, PhysicalPersonRegister>();
 
 var app = builder.Build();
 
