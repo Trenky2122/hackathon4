@@ -25,7 +25,7 @@ const UserEntriesHistoryComponent = () => {
                 <div className={"col-3 homepageForm"}>
                     <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
                     <p>Neevidujeme vstupy</p>
-                    <Button className={"me-2"} variant={"success"} onClick={() => navigate("/")}>Domov</Button>
+                    <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil")}>Profil</Button>
                 </div>
             </div>
         </div>
