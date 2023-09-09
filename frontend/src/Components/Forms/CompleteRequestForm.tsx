@@ -37,7 +37,7 @@ const CompleteRequestForm = () => {
     return (
         <div className={"container"}>
             <div className={"row justify-content-center"} >
-                <div className={"col-6 homepageForm"}>
+                <div className={"col-6 homepageForm"} style={{marginBottom: "200px", textDecoration: "none"}}>
                     <form onSubmit={handleSubmit}>
                         <h1 style={{marginBottom: "30px"}}>Dokončenie požidadavky o židaosť</h1>
                         <div className={"row mb-2"}>
