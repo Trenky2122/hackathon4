@@ -12,14 +12,6 @@ const GetUserEmailForm = () => {
     let [email, setEmail] : [string, any] = useState("");
     let [serverResponse, setServerResponse] : [any, any?] = useState(null);
     const actionName: string = "user_email";
-    const localization = new LocalizedStrings({
-        en: {
-            title: "Get user email",
-        },
-        sk: {
-            title: "Zadajte Váš email",
-        }
-    });
     const { executeRecaptcha } = useGoogleReCaptcha();
 
     const processRecaptcha = async (): Promise<boolean> => {
