@@ -36,7 +36,7 @@ const GetUserDetailsForm = () => {
         e.preventDefault()
         //send data to backend to create user
         setRegistrationSuccessful(true)
-        //set localstorage as logged-in user
+        localStorage.setItem("loggedIn", "true")
     }
 
     return (

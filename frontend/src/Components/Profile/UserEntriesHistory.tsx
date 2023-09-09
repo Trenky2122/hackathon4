@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
+import {Utils} from "../../Service/Utils";
 
 const UserEntriesHistoryComponent = () => {
     let navigate = useNavigate();
@@ -15,8 +16,13 @@ const UserEntriesHistoryComponent = () => {
     });
 
     useEffect(() => {
-        // Zavolaj backend service aby si dostal dáta o posledných vstupoch o používateľovi
-        // Dáta: kde, kedy vosiel, kedy odisiel, straveny cas dnu, poplatok, stav zaplatenia
+        if(!Utils.UserIsLogged()){
+            navigate("/401");
+        }
+        else{
+            // Zavolaj backend service aby si dostal dáta o posledných vstupoch o používateľovi
+            // Dáta: kde, kedy vosiel, kedy odisiel, straveny cas dnu, poplatok, stav zaplatenia
+        }
     },  [])
 
     return (

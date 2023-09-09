@@ -28,6 +28,7 @@ const LoginComponent = () => {
         e.preventDefault()
         // Zavolaj backend endpoint aby si zistil ci su prihlasovacie udaje spravne
         if(password == "admin") {
+            localStorage.setItem("loggedIn", "true")
             navigate("/profil")
         }
         else {
