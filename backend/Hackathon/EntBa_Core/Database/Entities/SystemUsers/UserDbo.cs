@@ -5,4 +5,5 @@ namespace EntBa_Core.Database.Entities.SystemUsers;
 
 public class UserDbo: PersonDbo
 {
+    public virtual IList<CardDbo>? IdCards { get; set; }
 }
