@@ -13,18 +13,9 @@ namespace EntBa_WebBackend.Controllers
 
         [HttpPost("/recaptcha/{token}/{action}")]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<bool>> RecaptchaVerification(string token, string action)
+        public async Task<bool> RecaptchaVerification(string token, string action)
         {
-            ActionResult result;
-            try
-            {
-                result = Ok(await _userService.RecaptchaVerification(token, action));
-            }
-            catch (HttpRequestException)
-            {
-                result = new StatusCodeResult(StatusCodes.Status500InternalServerError);
-            }
-            return result;
+            return await _userService.RecaptchaVerification(token, action);
         }
     }
 }

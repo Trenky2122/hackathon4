@@ -3,6 +3,7 @@ using System;
 using EntBa_Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EntBa_Core.Migrations
 {
     [DbContext(typeof(EntBaDbContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230909064958_FinesFix")]
+    partial class FinesFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +115,7 @@ namespace EntBa_Core.Migrations
                     b.ToTable("FileDbo");
                 });
 
-            modelBuilder.Entity("EntBa_Core.Database.Entities.Fines.NonUserFineDbo", b =>
+            modelBuilder.Entity("EntBa_Core.Database.Entities.FineDbo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -122,43 +125,6 @@ namespace EntBa_Core.Migrations
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
-
-                    b.Property<DateTimeOffset>("CreationDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTimeOffset>("DueDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("LicensePlate")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LicensePlateCountryCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NonUserFines");
-                });
-
-            modelBuilder.Entity("EntBa_Core.Database.Entities.Fines.RegisteredUserFineDbo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
-
-                    b.Property<DateTimeOffset>("CreationDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTimeOffset>("DueDate")
                         .HasColumnType("timestamp with time zone");
@@ -174,7 +140,7 @@ namespace EntBa_Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserFines");
+                    b.ToTable("Fines");
                 });
 
             modelBuilder.Entity("EntBa_Core.Database.Entities.LicensePlateDbo", b =>
@@ -429,7 +395,7 @@ namespace EntBa_Core.Migrations
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("EntBa_Core.Database.Entities.Fines.RegisteredUserFineDbo", b =>
+            modelBuilder.Entity("EntBa_Core.Database.Entities.FineDbo", b =>
                 {
                     b.HasOne("EntBa_Core.Database.Entities.SystemUsers.UserDbo", "User")
                         .WithMany()

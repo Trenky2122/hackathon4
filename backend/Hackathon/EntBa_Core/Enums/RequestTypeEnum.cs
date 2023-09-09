@@ -3,15 +3,15 @@
 public enum RequestTypeEnum
 {
     Resident,
-    Maintenance,
-    ParkingPermit,
-    SpecialUseOfCommunications,
     HandicappedResidentWorker,
-    Wedding,
-    Sightseeing,
-    PoliceException,
-    Supplying,
-    ShipSupplying,
+    SupplyingGreen,
+    ParkingPermit,
     CleaningSecurity,
-    SupplyingGreen
+    Supplying,
+    Maintenance,
+    ShipSupplying,
+    SpecialUseOfCommunications,
+    PoliceException,
+    Wedding,
+    Sightseeing
 }

@@ -17,7 +17,8 @@ builder.Services.AddDbContext<EntBaDbContext>();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddScoped<IPylonService, PylonService>();
 builder.Services.AddScoped<ICarEntranceService, CarEntranceService>();
-builder.Services.AddScoped<ITaxCalculationService, TaxCalculationService>();
+builder.Services.AddScoped<IFinesService, FinesService>();
+builder.Services.AddScoped<ITaxDutiesService, TaxDutiesesService>();
 
 builder.Services.Configure<ClientRateLimitOptions>(options =>
 {
