@@ -16,7 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EntBaDbContext>();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddScoped<IPylonService, PylonService>();
-builder.Services.AddScoped<ICameraService, CameraService>();
+builder.Services.AddScoped<ICarEntranceService, CarEntranceService>();
+builder.Services.AddScoped<ITaxCalculationService, TaxCalculationService>();
 
 builder.Services.Configure<ClientRateLimitOptions>(options =>
 {

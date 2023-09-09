@@ -1,3 +1,5 @@
+using EntBa_Core.Enums;
+
 namespace EntBa_Core;
 
 public static class Constants

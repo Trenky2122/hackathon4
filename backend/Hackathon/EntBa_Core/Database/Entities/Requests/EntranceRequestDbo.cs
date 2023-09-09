@@ -10,8 +10,9 @@ public class EntranceRequestDbo : BaseDbo
     public int UserId { get; set; }
     [ForeignKey(nameof(UserId))]
     public UserDbo? UserDbo { get; set; }
-    public IList<FileDbo>? Files { get; set; }
+    public virtual IList<FileDbo>? Files { get; set; }
     public RequestTypeEnum RequestType { get; set; }
     public RequestStateEnum RequestState { get; set; }
     public string? AllowedPlaces { get; set; }
+    public bool IsYearly { get; set; }
 }

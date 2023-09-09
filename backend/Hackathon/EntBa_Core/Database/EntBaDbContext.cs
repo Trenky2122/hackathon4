@@ -27,6 +27,7 @@ namespace EntBa_Core.Database
         public required DbSet<EntranceRequestDbo> EntranceRequests { get; set; }
         public required DbSet<CardDbo> Cards { get; set; }
         public required DbSet<TaxDutyDbo> TaxDuties { get; set; }
+        public required DbSet<FineDbo> Fines { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
