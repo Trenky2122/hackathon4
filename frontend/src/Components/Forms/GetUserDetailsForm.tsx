@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {Button, Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
-import {Link, useNavigate, useParams} from "react-router-dom";
-import LocalizedStrings from "react-localization";
+import {Button} from "react-bootstrap";
+import {useNavigate, useParams} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import MessagePopUp from "../PopUp/MessagePopUp";
 
@@ -14,15 +13,6 @@ const GetUserDetailsForm = () => {
     let [idNumber, setIdNumber] : [string, any] = useState("");
     let [registrationSuccessful, setRegistrationSuccessful] : [boolean, any] = useState(false);
     const { verificationKey } = useParams();
-
-    const localization = new LocalizedStrings({
-        en: {
-            title: "Get user details",
-        },
-        sk: {
-            title: "Získanie údajov o používateľovi",
-        }
-    });
 
     useEffect(() => {
         console.log(verificationKey)
@@ -44,7 +34,7 @@ const GetUserDetailsForm = () => {
             <div className={"row justify-content-center"} >
                 <div className={"col-6 homepageForm"}>
                     <form onSubmit={handleSubmit}>
-                        <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                        <h1 style={{marginBottom: "30px"}}>Získanie údajov o používateľovi</h1>
                         <div className={"row mb-3"}>
                             <div className={"col-6"}>
                                 <TextField label={"Meno"} required autoFocus value={name}

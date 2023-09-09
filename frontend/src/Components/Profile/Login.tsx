@@ -1,12 +1,8 @@
-import React, {useEffect, useState} from "react";
-import {Alert, Button} from "react-bootstrap";
-import {useNavigate, useParams} from "react-router-dom";
-import LocalizedStrings from "react-localization";
+import React, {useState} from "react";
+import {Button} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import MessagePopUp from "../PopUp/MessagePopUp";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
-import BackgroundImage from "../../Images/BackgroundImage";
 
 const LoginComponent = () => {
     let navigate = useNavigate();
@@ -14,15 +10,6 @@ const LoginComponent = () => {
     let [password, setPassword] : [string, any] = useState("");
     let [errorMessage, setErrorMessage] : [string, any] = useState("");
     let [loginError, setLoginError] : [boolean, any] = useState(false);
-
-    const localization = new LocalizedStrings({
-        en: {
-            title: "Login",
-        },
-        sk: {
-            title: "Prihlásenie",
-        }
-    });
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
@@ -42,7 +29,7 @@ const LoginComponent = () => {
                 <div className={"row justify-content-center"} >
                     <div className={"col-3 homepageForm"}>
                         <form onSubmit={handleSubmit}>
-                            <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                            <h1 style={{marginBottom: "30px"}}>Prihlásenie</h1>
                             <TextField label={"Email"} required autoFocus value={email}
                                        onChange={(e) => {
                                            setEmail(e.target.value);

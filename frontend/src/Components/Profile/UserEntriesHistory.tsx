@@ -1,19 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import LocalizedStrings from "react-localization";
 import {Utils} from "../../Service/Utils";
 
 const UserEntriesHistoryComponent = () => {
     let navigate = useNavigate();
-    const localization = new LocalizedStrings({
-        en: {
-            title: "Show user entries",
-        },
-        sk: {
-            title: "História vstupov používateľa",
-        }
-    });
 
     useEffect(() => {
         if(!Utils.UserIsLogged()){
@@ -29,7 +20,7 @@ const UserEntriesHistoryComponent = () => {
         <div className={"container"}>
             <div className={"row justify-content-center"} >
                 <div className={"col-3 homepageForm"}>
-                    <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                    <h1 style={{marginBottom: "30px"}}>História vstupov používateľa</h1>
                     <p>Neevidujeme vstupy</p>
                     <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil")}>Profil</Button>
                 </div>
