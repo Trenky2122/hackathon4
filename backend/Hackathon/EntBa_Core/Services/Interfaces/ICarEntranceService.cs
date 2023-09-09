@@ -4,7 +4,9 @@ namespace EntBa_Core.Services.Interfaces
 {
     public interface ICarEntranceService
     {
-        Task ProcessCameraLprEventFrontCamera(CameraLprEvent cameraLprEvent);
-        Task ProcessCameraLprEventBackCamera(CameraLprEvent cameraLprEvent);
+        Task ProcessCameraLprEventEntranceFrontCamera(CameraLprEvent cameraLprEvent);
+        Task ProcessCameraLprEventEntranceBackCamera(CameraLprEvent cameraLprEvent);
+        Task ProcessCameraLprEventExitFrontCamera(CameraLprEvent cameraLprEvent);
+        Task ProcessCameraLprEventExitBackCamera(CameraLprEvent cameraLprEvent);
     }
 }

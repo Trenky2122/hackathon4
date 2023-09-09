@@ -25,7 +25,7 @@ namespace EntBa_Core.Services.Implementation
             _taxDutiesesService = taxDutiesesService;
         }
 
-        public async Task ProcessCameraLprEventFrontCamera(CameraLprEvent cameraLprEvent)
+        public async Task ProcessCameraLprEventEntranceFrontCamera(CameraLprEvent cameraLprEvent)
         {
             var entrancePermit = await FindPermissionForCameraEvent(cameraLprEvent);
             if (entrancePermit is null)
@@ -41,8 +41,9 @@ namespace EntBa_Core.Services.Implementation
             await pylonTask;
         }
 
-        public async Task ProcessCameraLprEventBackCamera(CameraLprEvent cameraLprEvent)
+        public async Task ProcessCameraLprEventEntranceBackCamera(CameraLprEvent cameraLprEvent)
         {
+            var pylonTask = _pylonService.Close();
             var licensePlate = await DbContext.LicensePlates.FirstOrDefaultAsync(
                 plate => plate.PlateText == cameraLprEvent.LicensePlate &&
                          plate.Country == cameraLprEvent.LicensePlateCountryCode);
@@ -63,7 +64,7 @@ namespace EntBa_Core.Services.Implementation
                 .Include(ent => ent.Permission)
                 .ThenInclude(perm => perm.EntranceRequest)
                 .FirstOrDefaultAsync(entrance => 
-                entrance.EntranceCameraFront.AddMinutes(-2) < DateTimeOffset.UtcNow 
+                entrance.ExitCameraBack != null 
                 && entrance.LicensePlateId == licensePlate.Id);
             EntrancePermissionDbo? permission;
             if (entranceFromFront is null)
@@ -104,6 +105,150 @@ namespace EntBa_Core.Services.Implementation
                 Amount = _taxDutiesesService.CalculateTaxAmountForRequest(permission.EntranceRequest)
             });
             await DbContext.SaveChangesAsync();
+            await pylonTask;
+        }
+
+        public async Task ProcessCameraLprEventExitFrontCamera(CameraLprEvent cameraLprEvent)
+        {
+            var pylonTask = _pylonService.Open();
+            var licensePlate = await DbContext.LicensePlates.FirstOrDefaultAsync(
+                plate => plate.PlateText == cameraLprEvent.LicensePlate &&
+                         plate.Country == cameraLprEvent.LicensePlateCountryCode);
+            if (licensePlate is null)
+            {
+                await _finesService.CreateNonUserFine(new NonUserFineDbo()
+                {
+                    DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                    CreationDate = DateTimeOffset.UtcNow,
+                    LicensePlate = cameraLprEvent.LicensePlate,
+                    LicensePlateCountryCode = cameraLprEvent.LicensePlateCountryCode,
+                    Amount = 123456,
+                    Reason = "Neoprávnený vstup ..."
+                });
+                return;
+            }
+            var entranceOriginal = await DbContext.Entrances
+                .Include(ent => ent.Permission)
+                .ThenInclude(perm => perm.EntranceRequest)
+                .FirstOrDefaultAsync(entrance => 
+                entrance.ExitCameraBack != null  
+                && entrance.LicensePlateId == licensePlate.Id);
+            EntrancePermissionDbo? permission;
+            if (entranceOriginal is null)
+            {
+                permission = await FindPermissionForCameraEvent(cameraLprEvent);
+                if (permission is null)
+                {
+                    // notifikacia uradov s dokazovym materialom
+                    // vyrubenie pokuty
+                    await _finesService.CreateUserFine(new RegisteredUserFineDbo()
+                    {
+                        Reason = "Neoprávnený vstup",
+                        DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                        CreationDate = DateTimeOffset.UtcNow,
+                        Amount = 123456,
+                        UserId = licensePlate.UserId
+                    });
+                    return;
+                }
+                await DbContext.Entrances.AddAsync(new EntranceDbo()
+                {
+                    EntranceCameraFront = DateTimeOffset.UtcNow,
+                    EntranceCameraBack = DateTimeOffset.UtcNow,
+                    ExitCameraFront = DateTimeOffset.UtcNow,
+                    LicensePlateId = licensePlate.Id,
+                    PermissionId = permission.Id
+                });
+            }
+            else
+            {
+                entranceOriginal.EntranceCameraFront = DateTimeOffset.UtcNow;
+                permission = entranceOriginal.Permission!;
+            }
+
+            if (permission.ValidTo > DateTimeOffset.UtcNow)
+                await _finesService.CreateUserFine(new RegisteredUserFineDbo()
+                {
+                    Reason = "Neopravneny pohyb ...",
+                    DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                    CreationDate = DateTimeOffset.UtcNow,
+                    UserId = permission.EntranceRequest.UserId,
+                    Amount = 1234,
+                });
+            await DbContext.SaveChangesAsync();
+            await pylonTask;
+        }
+        
+        public async Task ProcessCameraLprEventExitBackCamera(CameraLprEvent cameraLprEvent)
+        {
+            var pylonTask = _pylonService.Close();
+            var licensePlate = await DbContext.LicensePlates.FirstOrDefaultAsync(
+                plate => plate.PlateText == cameraLprEvent.LicensePlate &&
+                         plate.Country == cameraLprEvent.LicensePlateCountryCode);
+            if (licensePlate is null)
+            {
+                await _finesService.CreateNonUserFine(new NonUserFineDbo()
+                {
+                    DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                    CreationDate = DateTimeOffset.UtcNow,
+                    LicensePlate = cameraLprEvent.LicensePlate,
+                    LicensePlateCountryCode = cameraLprEvent.LicensePlateCountryCode,
+                    Amount = 123456,
+                    Reason = "Neoprávnený vstup ..."
+                });
+                return;
+            }
+            var entranceOriginal = await DbContext.Entrances
+                .Include(ent => ent.Permission)
+                .ThenInclude(perm => perm.EntranceRequest)
+                .FirstOrDefaultAsync(entrance => 
+                entrance.ExitCameraBack != null  
+                && entrance.LicensePlateId == licensePlate.Id);
+            EntrancePermissionDbo? permission;
+            if (entranceOriginal is null)
+            {
+                permission = await FindPermissionForCameraEvent(cameraLprEvent);
+                if (permission is null)
+                {
+                    // notifikacia uradov s dokazovym materialom
+                    // vyrubenie pokuty
+                    await _finesService.CreateUserFine(new RegisteredUserFineDbo()
+                    {
+                        Reason = "Neoprávnený vstup",
+                        DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                        CreationDate = DateTimeOffset.UtcNow,
+                        Amount = 123456,
+                        UserId = licensePlate.UserId
+                    });
+                    return;
+                }
+                await DbContext.Entrances.AddAsync(new EntranceDbo()
+                {
+                    EntranceCameraFront = DateTimeOffset.UtcNow,
+                    EntranceCameraBack = DateTimeOffset.UtcNow,
+                    ExitCameraFront = DateTimeOffset.UtcNow,
+                    ExitCameraBack = DateTimeOffset.UtcNow,
+                    LicensePlateId = licensePlate.Id,
+                    PermissionId = permission.Id
+                });
+            }
+            else
+            {
+                entranceOriginal.ExitCameraBack = DateTimeOffset.UtcNow;
+                permission = entranceOriginal.Permission!;
+            }
+
+            if (permission.ValidTo > DateTimeOffset.UtcNow)
+                await _finesService.CreateUserFine(new RegisteredUserFineDbo()
+                {
+                    Reason = "Neopravneny pohyb ...",
+                    DueDate = DateTimeOffset.UtcNow.AddDays(15),
+                    CreationDate = DateTimeOffset.UtcNow,
+                    UserId = permission.EntranceRequest.UserId,
+                    Amount = 1234,
+                });
+            await DbContext.SaveChangesAsync();
+            await pylonTask;
         }
         
         private async Task<EntrancePermissionDbo?> FindPermissionForCameraEvent(CameraLprEvent cameraEvent)

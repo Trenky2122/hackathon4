@@ -17,19 +17,37 @@ namespace EntBa_Pylon.Controllers
         }
 
         [HttpPost]
-        public async Task ProcessDtkLprEventFrontCamera()
+        public async Task ProcessDtkLprEventEnterFrontCamera()
         {
             var requestParser = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
             var cameraEvent = new CameraLprEvent(requestParser);
-            await _carEntranceService.ProcessCameraLprEventFrontCamera(cameraEvent);
+            await _carEntranceService.ProcessCameraLprEventEntranceFrontCamera(cameraEvent);
         }
 
         [HttpPost]
-        public async Task ProcessDtkLprEventBackCamera()
+        public async Task ProcessDtkLprEventEnterBackCamera()
         {
             var requestParser = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
             var cameraEvent = new CameraLprEvent(requestParser);
-            await _carEntranceService.ProcessCameraLprEventBackCamera(cameraEvent);
+            await _carEntranceService.ProcessCameraLprEventEntranceBackCamera(cameraEvent);
+        }
+        
+
+        [HttpPost]
+        public async Task ProcessDtkLprEventExitFrontCamera()
+        {
+            var requestParser = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
+            var cameraEvent = new CameraLprEvent(requestParser);
+            await _carEntranceService.ProcessCameraLprEventExitFrontCamera(cameraEvent);
+        }
+        
+
+        [HttpPost]
+        public async Task ProcessDtkLprEventExitBackCamera()
+        {
+            var requestParser = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
+            var cameraEvent = new CameraLprEvent(requestParser);
+            await _carEntranceService.ProcessCameraLprEventExitBackCamera(cameraEvent);
         }
     }
     
