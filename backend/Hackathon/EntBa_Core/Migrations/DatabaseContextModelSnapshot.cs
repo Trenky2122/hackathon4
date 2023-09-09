@@ -30,18 +30,29 @@ namespace EntBa_Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTimeOffset>("Entrance")
+                    b.Property<DateTimeOffset?>("EntranceCameraBack")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTimeOffset?>("Exit")
+                    b.Property<DateTimeOffset>("EntranceCameraFront")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset?>("ExitCameraBack")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset?>("ExitCameraFront")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("LicensePlateId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LicensePlateId");
+
+                    b.HasIndex("PermissionId");
 
                     b.ToTable("Entrances");
                 });
@@ -101,6 +112,34 @@ namespace EntBa_Core.Migrations
                     b.ToTable("FileDbo");
                 });
 
+            modelBuilder.Entity("EntBa_Core.Database.Entities.FineDbo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTimeOffset>("DueDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Fines");
+                });
+
             modelBuilder.Entity("EntBa_Core.Database.Entities.LicensePlateDbo", b =>
                 {
                     b.Property<int>("Id")
@@ -136,6 +175,9 @@ namespace EntBa_Core.Migrations
 
                     b.Property<string>("AllowedPlaces")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsYearly")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("RequestState")
                         .HasColumnType("integer");
@@ -309,7 +351,15 @@ namespace EntBa_Core.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EntBa_Core.Database.Entities.EntrancePermissions.EntrancePermissionDbo", "Permission")
+                        .WithMany()
+                        .HasForeignKey("PermissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("LicensePlate");
+
+                    b.Navigation("Permission");
                 });
 
             modelBuilder.Entity("EntBa_Core.Database.Entities.EntrancePermissions.EntrancePermissionDbo", b =>
@@ -340,6 +390,17 @@ namespace EntBa_Core.Migrations
                         .IsRequired();
 
                     b.Navigation("Request");
+                });
+
+            modelBuilder.Entity("EntBa_Core.Database.Entities.FineDbo", b =>
+                {
+                    b.HasOne("EntBa_Core.Database.Entities.SystemUsers.UserDbo", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntBa_Core.Database.Entities.LicensePlateDbo", b =>

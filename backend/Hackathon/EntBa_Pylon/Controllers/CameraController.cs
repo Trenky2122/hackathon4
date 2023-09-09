@@ -3,27 +3,33 @@ using EntBa_Core.Services.Interfaces;
 using HttpMultipartParser;
 using Microsoft.AspNetCore.Mvc;
 
-
-namespace EntBa_WebBackend.Controllers
+namespace EntBa_Pylon.Controllers
 {
     [ApiController]
-    [Route("camera")]
+    [Route("[controller]/[action]")]
     public class CameraController : ControllerBase
     {
-        private readonly ICameraService _cameraService;
+        private readonly ICarEntranceService _carEntranceService;
 
-        public CameraController(ICameraService cameraService)
+        public CameraController(ICarEntranceService carEntranceService)
         {
-            _cameraService = cameraService;
+            _carEntranceService = carEntranceService;
         }
 
-        [HttpPost("processDtkLprEvent")]
-        [Consumes("multipart/form-data")]
-        public async Task ProcessDtkLprEvent()
+        [HttpPost]
+        public async Task ProcessDtkLprEventFrontCamera()
         {
             var requestParser = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
-            var cameraResult = new CameraLprEvent(requestParser);
-            await _cameraService.ProcessCameraLprEvent(cameraResult);
+            var cameraEvent = new CameraLprEvent(requestParser);
+            await _carEntranceService.ProcessCameraLprEventFrontCamera(cameraEvent);
+        }
+
+        [HttpPost]
+        public async Task ProcessDtkLprEventBackCamera()
+        {
+            var requestParser = await MultipartFormDataParser.ParseAsync(Request.Body).ConfigureAwait(false);
+            var cameraEvent = new CameraLprEvent(requestParser);
+            await _carEntranceService.ProcessCameraLprEventBackCamera(cameraEvent);
         }
     }
     
