@@ -8,7 +8,7 @@ const NavigationComponent = () => {
 
     useEffect(() => {
         console.log(location)
-    }, [])
+    }, [location])
 
     return (
         <Navbar style={location.pathname === "/" ? {backgroundColor: 'transparent'} : {}} expand={false} >
@@ -44,6 +44,10 @@ const NavigationComponent = () => {
                             </Navbar.Toggle>
                             <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
                                 <Link className={"nav-link"} to={"/profil/historiaVstupov"}>História vstupov používateľa</Link>
+                            </Navbar.Toggle>
+                            <a>Admin:</a>
+                            <Navbar.Toggle aria-controls={"offcanvasNavbar"}>
+                                <Link className={"nav-link"} to={"/admin/ziadosti"}>Žiadosti</Link>
                             </Navbar.Toggle>
                         </Nav>
                     </Offcanvas.Body>

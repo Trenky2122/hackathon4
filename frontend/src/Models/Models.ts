@@ -20,3 +20,20 @@ export enum RequestTypeEnum
     Wedding,
     Sightseeing
 }
+
+export enum RequestStateEnum{
+    WaitingForApproval,
+    WaitingForCompletionByUser,
+    Accepted,
+    Rejected
+}
+
+export interface EntranceRequestBase {
+    Id: number
+    State: RequestStateEnum
+    Type: RequestTypeEnum,
+    RequesterName: string,
+    RequesterSurname: string,
+    Caption: string,
+    Date: Date
+}

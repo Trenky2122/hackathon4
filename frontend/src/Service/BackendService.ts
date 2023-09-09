@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import { RegistrationResultEnum } from "../Models/Models";
+import {EntranceRequestBase, RegistrationResultEnum} from "../Models/Models";
 
 class SongbookBackendService{
     static config = require("../config.json");
@@ -25,6 +25,14 @@ class SongbookBackendService{
 
     static verifyRecaptchaToken(token: string, action: string): Promise<AxiosResponse<boolean>>{
         return axios.post(this.serverUrl+"recaptcha/"+token+"/"+action);
+    }
+
+    //endregion
+
+    //region Admin
+
+    static getEntranceRequestsBase(): Promise<AxiosResponse<EntranceRequestBase[]>>{
+        return axios.get<EntranceRequestBase[]>(this.serverUrl+"admin/entranceRequestsBase");
     }
 
     //endregion

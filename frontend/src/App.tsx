@@ -18,6 +18,8 @@ import BackgroundImage from "./Images/BackgroundImage";
 import {Constants} from "./Constants/Constants";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 import CompleteRequestForm from "./Components/Forms/CompleteRequestForm";
+import AdminMainPage from "./Components/Admin/AdminMainPage";
+import EntranceRequestDetailed from "./Components/Admin/EntranceRequestDetailed";
 
 function App() {
     return (
@@ -42,6 +44,9 @@ function App() {
                     <Route path="/ziadost/kategorizacia" element={<DeterminateCategoryForm/>}></Route>
                     <Route path="/ziadost/kategoria/:caseIndex" element={<CompleteRequestForm/>}></Route>
                     <Route path="/ziadost/zamietnuta" element={<PermitNotGrantedComponent/>}></Route>
+
+                    <Route path="/admin/ziadosti" element={<AdminMainPage />}></Route>
+                    <Route path="/admin/ziadosti/:id" element={<EntranceRequestDetailed />}></Route>
 
                     <Route path="/401" element={<Unauthorized/>}/>
                     <Route path="/404" element={<NotFound/>}/>
