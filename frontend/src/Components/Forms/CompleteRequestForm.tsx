@@ -11,6 +11,7 @@ const CompleteRequestForm = () => {
     const { caseIndex } = useParams();
     let [requestPrices, setRequestPrices]: [number[], any] = useState([0, 0])
     let [licensePlate, setLicensePlate]: [string, any] = useState("")
+    let [startDate, setStartDate]: [string, any] = useState("")
     let [isYearly, setIsYearly]: [boolean, any] = useState(false)
 
     useEffect(() => {
@@ -23,7 +24,12 @@ const CompleteRequestForm = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
+        //Call backend to register a request
     }
+
+    useEffect(() => {
+        console.log(startDate)
+    }, [startDate])
 
     return (
         <div className={"container"}>
@@ -31,10 +37,23 @@ const CompleteRequestForm = () => {
                 <div className={"col-6 homepageForm"}>
                     <form onSubmit={handleSubmit}>
                         <h1 style={{marginBottom: "30px"}}>Dokončenie požidadavky o židaosť</h1>
-                        <Button className={"me-2"} onClick={() => setIsYearly(false)} variant={"primary"}>Deň</Button>
-                        <Button className={"me-2"} disabled={requestPrices[1] === 0} onClick={() => setIsYearly(true)} variant={"primary"}>Rok</Button>
-                        <TextField label={"Cena"} disabled value={!isYearly ? requestPrices[0] : requestPrices[1] }/>
-                        <TextField label={"EČV vozidla"} value={licensePlate} onChange={(e) => {setLicensePlate(e.target.value)}}/>
+                        <div className={"row mb-2"}>
+                            <div className={"col-6"}>
+                                    <Button className={"me-2"} onClick={() => setIsYearly(false)} variant={"primary"}>Deň</Button>
+                                    <Button className={"me-2"} disabled={requestPrices[1] === 0} onClick={() => setIsYearly(true)} variant={"secondary"}>Rok</Button>
+                            </div>
+                            <div className={"col-6"}>
+                                <TextField label={"Cena"} disabled value={!isYearly ? requestPrices[0] : requestPrices[1] }/>
+                            </div>
+                        </div>
+                        <div className={"row mb-4"}>
+                            <div className={"col-6"}>
+                                <TextField  label={"EČV vozidla"} value={licensePlate} onChange={(e) => {setLicensePlate(e.target.value)}}/>
+                            </div>
+                            <div className={"col-6"}>
+                                <TextField type={"date"} style={{marginTop: "15px", width: "195px"}} value={startDate} onChange={(e) => {setStartDate(e.target.value)}}/>
+                            </div>
+                        </div>
                         <Button className={"me-2"} onClick={() => navigate("/profil/ziadosti")} variant={"danger"}>Zrušiť</Button>
                         <Button className={"me-2"} type={"submit"} variant={"success"}>Potvrdiť</Button>
                     </form>
