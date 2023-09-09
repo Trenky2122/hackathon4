@@ -1,5 +1,4 @@
 import {Button, Modal} from "react-bootstrap";
-import LocalizedStrings from "react-localization";
 import {useNavigate} from "react-router-dom";
 
 // Component used to deliver successful message to user via popUp
@@ -7,14 +6,6 @@ import {useNavigate} from "react-router-dom";
 // In case when ButtonUrl is empty string (""), page will be reloaded
 const MessagePopUp = (props : { TitleText: string, BodyText: string, readonly ButtonText?: string , readonly ButtonUrl: string, show: boolean}) => {
     let navigate = useNavigate();
-    const localization = new LocalizedStrings({
-        en:{
-            continue: "Continue",
-        },
-        sk:{
-            continue: "Pokračovať",
-        }
-    })
 
     return (
         <Modal
@@ -30,7 +21,7 @@ const MessagePopUp = (props : { TitleText: string, BodyText: string, readonly Bu
                 <a>{props.BodyText}</a>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant={"success"} onClick={() => {props.ButtonUrl == "" ? window.location.reload() : navigate(props.ButtonUrl)}}>{props.ButtonText != undefined ? props.ButtonText : localization.continue}</Button>
+                <Button variant={"success"} onClick={() => {props.ButtonUrl == "" ? window.location.reload() : navigate(props.ButtonUrl)}}>{props.ButtonText != undefined ? props.ButtonText : "Pokračovať"}</Button>
             </Modal.Footer>
         </Modal>
     )

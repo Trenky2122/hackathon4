@@ -1,31 +1,28 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import LocalizedStrings from "react-localization";
+import {Utils} from "../../Service/Utils";
 
 const UserEntriesHistoryComponent = () => {
     let navigate = useNavigate();
-    const localization = new LocalizedStrings({
-        en: {
-            title: "Show user entries",
-        },
-        sk: {
-            title: "História vstupov používateľa",
-        }
-    });
 
     useEffect(() => {
-        // Zavolaj backend service aby si dostal dáta o posledných vstupoch o používateľovi
-        // Dáta: kde, kedy vosiel, kedy odisiel, straveny cas dnu, poplatok, stav zaplatenia
+        if(!Utils.UserIsLogged()){
+            navigate("/401");
+        }
+        else{
+            // Zavolaj backend service aby si dostal dáta o posledných vstupoch o používateľovi
+            // Dáta: kde, kedy vosiel, kedy odisiel, straveny cas dnu, poplatok, stav zaplatenia
+        }
     },  [])
 
     return (
         <div className={"container"}>
             <div className={"row justify-content-center"} >
                 <div className={"col-3 homepageForm"}>
-                    <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                    <h1 style={{marginBottom: "30px"}}>História vstupov používateľa</h1>
                     <p>Neevidujeme vstupy</p>
-                    <Button className={"me-2"} variant={"success"} onClick={() => navigate("/")}>Domov</Button>
+                    <Button className={"me-2"} variant={"success"} onClick={() => navigate("/profil")}>Profil</Button>
                 </div>
             </div>
         </div>

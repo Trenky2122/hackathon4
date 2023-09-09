@@ -42,6 +42,7 @@ const LoginComponent = () => {
             if(res){
                 // Zavolaj backend endpoint aby si zistil ci su prihlasovacie udaje spravne
                 if(password == "admin") {
+                    localStorage.setItem("loggedIn", "true")
                     navigate("/profil")
                 }
                 else {
@@ -59,17 +60,17 @@ const LoginComponent = () => {
                 <div className={"row justify-content-center"} >
                     <div className={"col-3 homepageForm"}>
                         <form onSubmit={handleSubmit}>
-                            <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                            <h1 style={{marginBottom: "30px"}}>Prihlásenie</h1>
                             <TextField label={"Email"} required autoFocus value={email}
                                        onChange={(e) => {
                                            setEmail(e.target.value);
                                            setErrorMessage("");
-                                       }} fullWidth />
+                                       }} fullWidth type={"email"} />
                             <TextField label={"Heslo"} required value={password}
                                        onChange={(e) => {
                                            setPassword(e.target.value);
                                            setErrorMessage("");
-                                       }} fullWidth />
+                                       }} fullWidth type={"password"} />
                             <Button className={"me-2 mt-3"} type={"submit"} variant={"success"}>Prihlásiť sa</Button>
                         </form>
                     </div>

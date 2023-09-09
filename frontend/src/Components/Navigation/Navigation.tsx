@@ -1,21 +1,10 @@
 import React, {useEffect} from "react";
 import {Container, Nav, Navbar, Offcanvas} from "react-bootstrap";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import LocalizedStrings from "react-localization";
 
 const NavigationComponent = () => {
     let navigate = useNavigate();
     let location = useLocation();
-    const localization = new LocalizedStrings({
-        en: {
-            home: "Home",
-            permitRegistration: "Registrácia povolenia",
-        },
-        sk: {
-            home: "Domov",
-            permitRegistration: "Registrácia povolenia",
-        }
-    });
 
     useEffect(() => {
         console.log(location)
@@ -25,7 +14,7 @@ const NavigationComponent = () => {
         <Navbar style={location.pathname === "/" ? {backgroundColor: 'transparent'} : {}} expand={false} >
             <Container fluid>
                 <Navbar.Brand onClick={() => navigate("/")}>
-                    {location.pathname !== "/" ? localization.home : ""}
+                    {location.pathname !== "/" ? "Domov" : ""}
                 </Navbar.Brand>
                 <div>
                     <Navbar.Toggle aria-controls={"offcanvasNavbar"}/>

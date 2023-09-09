@@ -1,7 +1,6 @@
 import React, {useCallback, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
 import MessagePopUp from "../PopUp/MessagePopUp";
 import {RegistrationResultEnum} from "../../Models/Models";
@@ -52,7 +51,7 @@ const GetUserEmailForm = () => {
                 <div className={"row justify-content-center"} >
                     <div className={"col-3 homepageForm"}>
                         <form onSubmit={handleSubmit}>
-                        <h1 style={{marginBottom: "30px"}}>{localization.title} </h1>
+                        <h1 style={{marginBottom: "30px"}}>Zadajte Váš email</h1>
                             <TextField className={"mb-4"} label={"Email"} required value={email}
                                        onChange={(e) => {
                                            setEmail(e.target.value);
