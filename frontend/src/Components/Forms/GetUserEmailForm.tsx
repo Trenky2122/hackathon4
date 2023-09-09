@@ -12,7 +12,7 @@ const GetUserEmailForm = () => {
     let navigate = useNavigate();
     let [email, setEmail] : [string, any] = useState("");
     let [serverResponse, setServerResponse] : [any, any?] = useState(null);
-    const actionName: string = "get_user_email";
+    const actionName: string = "user_email";
     const localization = new LocalizedStrings({
         en: {
             title: "Get user email",

@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {Alert, Button} from "react-bootstrap";
-import {useNavigate, useParams} from "react-router-dom";
+import React, {useCallback, useState} from "react";
+import {Button} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 import LocalizedStrings from "react-localization";
 import TextField from "@material-ui/core/TextField";
 import MessagePopUp from "../PopUp/MessagePopUp";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
-import BackgroundImage from "../../Images/BackgroundImage";
+import {useGoogleReCaptcha} from "react-google-recaptcha-v3";
+import {UtilService} from "../../Service/UtilService";
 
 const LoginComponent = () => {
     let navigate = useNavigate();
@@ -14,6 +13,8 @@ const LoginComponent = () => {
     let [password, setPassword] : [string, any] = useState("");
     let [errorMessage, setErrorMessage] : [string, any] = useState("");
     let [loginError, setLoginError] : [boolean, any] = useState(false);
+
+    const actionName: string = "login";
 
     const localization = new LocalizedStrings({
         en: {
@@ -24,15 +25,32 @@ const LoginComponent = () => {
         }
     });
 
+    const { executeRecaptcha } = useGoogleReCaptcha();
+
+    const processRecaptcha = async (): Promise<boolean> => {
+        let token = await getRecaptchaToken();
+        return await UtilService.verifyReCaptchaToken(token, actionName);
+    }
+
+    const getRecaptchaToken = useCallback(async (): Promise<string> => {
+        return await UtilService.getRecaptchaToken(executeRecaptcha!, actionName)
+    }, [executeRecaptcha]);
+
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        // Zavolaj backend endpoint aby si zistil ci su prihlasovacie udaje spravne
-        if(password == "admin") {
-            navigate("/profil")
-        }
-        else {
-            setLoginError(true)
-        }
+        processRecaptcha().then((res) =>{
+            if(res){
+                // Zavolaj backend endpoint aby si zistil ci su prihlasovacie udaje spravne
+                if(password == "admin") {
+                    navigate("/profil")
+                }
+                else {
+                    setLoginError(true)
+                }
+            }
+        }).catch((e) => {
+            console.log(e)
+        });
     }
 
     return (
