@@ -30,6 +30,10 @@ const CompleteRequestForm = () => {
         setRequestSent(true)
     }
 
+    const handleFile = (e: any) => {
+        console.log(e.target.files)
+    }
+
     return (
         <div className={"container"}>
             <div className={"row justify-content-center"} >
@@ -52,6 +56,10 @@ const CompleteRequestForm = () => {
                             <div className={"col-6"}>
                                 <TextField type={"date"} required style={{marginTop: "15px", width: "195px"}} value={startDate} onChange={(e) => {setStartDate(e.target.value)}}/>
                             </div>
+                        </div>
+                        <div className={"row mb-4 justify-content-center"}>
+                            <p>Dolžiť doklady:</p>
+                            <input style={{marginLeft: "325px"}} type="file" name="images" id="imgid" className="imgcls" onChange={handleFile} multiple/>
                         </div>
                         <Button className={"me-2"} onClick={() => navigate("/profil/ziadosti")} variant={"danger"}>Zrušiť</Button>
                         <Button className={"me-2"} type={"submit"} variant={"success"}>Potvrdiť</Button>
