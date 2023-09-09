@@ -112,7 +112,7 @@ namespace EntBa_Core.Migrations
                     b.ToTable("FileDbo");
                 });
 
-            modelBuilder.Entity("EntBa_Core.Database.Entities.FineDbo", b =>
+            modelBuilder.Entity("EntBa_Core.Database.Entities.Fines.NonUserFineDbo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -122,6 +122,43 @@ namespace EntBa_Core.Migrations
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
+
+                    b.Property<DateTimeOffset>("CreationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset>("DueDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LicensePlate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LicensePlateCountryCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NonUserFines");
+                });
+
+            modelBuilder.Entity("EntBa_Core.Database.Entities.Fines.RegisteredUserFineDbo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTimeOffset>("CreationDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTimeOffset>("DueDate")
                         .HasColumnType("timestamp with time zone");
@@ -137,7 +174,7 @@ namespace EntBa_Core.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Fines");
+                    b.ToTable("UserFines");
                 });
 
             modelBuilder.Entity("EntBa_Core.Database.Entities.LicensePlateDbo", b =>
@@ -392,7 +429,7 @@ namespace EntBa_Core.Migrations
                     b.Navigation("Request");
                 });
 
-            modelBuilder.Entity("EntBa_Core.Database.Entities.FineDbo", b =>
+            modelBuilder.Entity("EntBa_Core.Database.Entities.Fines.RegisteredUserFineDbo", b =>
                 {
                     b.HasOne("EntBa_Core.Database.Entities.SystemUsers.UserDbo", "User")
                         .WithMany()
