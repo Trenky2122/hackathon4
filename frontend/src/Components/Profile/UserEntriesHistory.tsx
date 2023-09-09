@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {Utils} from "../../Service/Utils";
+import {UtilService} from "../../Service/UtilService";
 
 const UserEntriesHistoryComponent = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if(!Utils.UserIsLogged()){
+        if(!UtilService.UserIsLogged()){
             navigate("/401");
         }
         else{

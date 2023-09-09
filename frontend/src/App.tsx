@@ -17,6 +17,7 @@ import RequestsComponent from "./Components/Profile/Requests";
 import BackgroundImage from "./Images/BackgroundImage";
 import {Constants} from "./Constants/Constants";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
+import CompleteRequestForm from "./Components/Forms/CompleteRequestForm";
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/profil/historiaVstupov" element={<UserEntriesHistoryComponent/>}></Route>
 
                     <Route path="/ziadost/kategorizacia" element={<DeterminateCategoryForm/>}></Route>
+                    <Route path="/ziadost/kategoria/:caseIndex" element={<CompleteRequestForm/>}></Route>
                     <Route path="/ziadost/zamietnuta" element={<PermitNotGrantedComponent/>}></Route>
 
                     <Route path="/401" element={<Unauthorized/>}/>
