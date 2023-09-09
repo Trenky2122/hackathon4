@@ -15,7 +15,6 @@ import ProfileComponent from "./Components/Profile/Profile";
 import LoginComponent from "./Components/Profile/Login";
 import RequestsComponent from "./Components/Profile/Requests";
 import BackgroundImage from "./Images/BackgroundImage";
-import RecaptchaWrapper from "./Components/Captcha/RecaptchaWrapper";
 import {Constants} from "./Constants/Constants";
 import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
