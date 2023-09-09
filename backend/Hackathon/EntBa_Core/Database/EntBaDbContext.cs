@@ -1,6 +1,8 @@
 ﻿using EntBa_Core.Database.Entities;
 using EntBa_Core.Database.Entities.Entrance;
 using EntBa_Core.Database.Entities.EntrancePermissions;
+using EntBa_Core.Database.Entities.Fines;
+using EntBa_Core.Database.Entities.Fines.Abstractions;
 using EntBa_Core.Database.Entities.Requests;
 using EntBa_Core.Database.Entities.SystemUsers;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +29,8 @@ namespace EntBa_Core.Database
         public required DbSet<EntranceRequestDbo> EntranceRequests { get; set; }
         public required DbSet<CardDbo> Cards { get; set; }
         public required DbSet<TaxDutyDbo> TaxDuties { get; set; }
-        public required DbSet<FineDbo> Fines { get; set; }
+        public required DbSet<RegisteredUserFineDbo> UserFines { get; set; }
+        public required DbSet<NonUserFineDbo> NonUserFines { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
